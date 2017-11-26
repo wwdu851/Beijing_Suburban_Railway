@@ -21,11 +21,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var northBound = true
     var firstTouch = true
     let stationArray = ["Huangtudian","Nankou","Badaling","Yanqing","Kangzhuang","Shacheng"]
+    var buttonList = [UIButton]()
+    
     
     @IBOutlet weak var htdBtn: UIButton!
     @IBOutlet weak var nkBtn: UIButton!
     @IBOutlet weak var bdlBtn: UIButton!
     @IBOutlet weak var yqBtn: UIButton!
+    @IBOutlet weak var kzBtn: UIButton!
     @IBOutlet weak var scBtn: UIButton!
     
     var firstBtnLocation:CGPoint?
@@ -149,6 +152,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             break
         }
         
+        buttonList = [htdBtn,nkBtn,bdlBtn,yqBtn,scBtn]
         self.updateDisplayTable(strt: startPlace, dest: destinationPlace, northBound: true)
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -280,12 +284,50 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     
-    func enableAllBtns(){
+    func enableAllBtns(btnArray:[UIButton]){
         let btnArray = [htdBtn,nkBtn,bdlBtn,yqBtn,scBtn]
         for b in btnArray{
             if b?.isEnabled == false{
                 b?.isEnabled = true
             }
+        }
+    }
+    
+    func eraseAllBtns(btnArray:[UIButton]){
+        for index in btnArray{
+            index.setTitle("", for: .normal)
+        }
+    }
+    
+    func buttonAction(button:UIButton){
+        var place = ""
+
+        switch button{
+        case htdBtn:
+            place = "Huangtudian"
+        case nkBtn:
+            place = "Nankou"
+        case bdlBtn:
+            place = "Badaling"
+        case yqBtn:
+            place = "Yanqing"
+        case kzBtn:
+            place = "Kangzhuang"
+        default:
+            place = "na"
+        }
+        if firstTouch == true{
+            eraseAllBtns(btnArray: buttonList)
+            startPlace = place
+            button.setTitle("From", for: .normal)
+            firstTouch = false
+            button.isEnabled = false
+        }else{
+            destinationPlace = place
+            button.setTitle("To", for: .normal)
+            firstTouch = true
+            updateDisplayTable(strt: startPlace, dest: destinationPlace, northBound: northBoundCheck(start: startPlace, end: destinationPlace))
+            enableAllBtns(btnArray: buttonList)
         }
     }
     
@@ -315,86 +357,36 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
      }
     
     
+
+    
+    
     @IBAction func htdBtnAction(_ sender: UIButton) {
-        if firstTouch == true{
-            startPlace = "Huangtudian"
-            htdBtn.setTitle("From", for: .normal)
-            firstTouch = false
-            htdBtn.isEnabled = false
-        }else{
-            destinationPlace = "Huangtudian"
-            htdBtn.setTitle("To", for: .normal)
-            firstTouch = true
-            updateDisplayTable(strt: startPlace, dest: destinationPlace, northBound: northBoundCheck(start: startPlace, end: destinationPlace))
-            enableAllBtns()
-            
-        }
+        buttonAction(button: htdBtn)
         
     }
     
     
     @IBAction func nkBtnAction(_ sender: UIButton) {
-        if firstTouch == true{
-            startPlace = "Nankou"
-            nkBtn.setTitle("From", for: .normal)
-            firstTouch = false
-            nkBtn.isEnabled = false
-        }else{
-            destinationPlace = "Nankou"
-            nkBtn.setTitle("To", for: .normal)
-            firstTouch = true
-            updateDisplayTable(strt: startPlace, dest: destinationPlace, northBound: northBoundCheck(start: startPlace, end: destinationPlace))
-            enableAllBtns()
-        }
+        buttonAction(button: nkBtn)
     }
     
     
     @IBAction func bdlBtnAction(_ sender: UIButton) {
-        if firstTouch == true{
-            startPlace = "Badaling"
-            bdlBtn.setTitle("From", for: .normal)
-            firstTouch = false
-            bdlBtn.isEnabled = false
-        }else{
-            destinationPlace = "Badaling"
-            bdlBtn.setTitle("To", for: .normal)
-            firstTouch = true
-            updateDisplayTable(strt: startPlace, dest: destinationPlace, northBound: northBoundCheck(start: startPlace, end: destinationPlace))
-            enableAllBtns()
-        }
+        buttonAction(button: bdlBtn)
     }
     
     
     @IBAction func yqBtnAction(_ sender: UIButton) {
-        if firstTouch == true{
-            startPlace = "Yanqing"
-            yqBtn.setTitle("From", for: .normal)
-            firstTouch = false
-            yqBtn.isEnabled = false
-        }else{
-            destinationPlace = "Yanqing"
-            yqBtn.setTitle("To", for: .normal)
-            firstTouch = true
-            updateDisplayTable(strt: startPlace, dest: destinationPlace, northBound: northBoundCheck(start: startPlace, end: destinationPlace))
-            enableAllBtns()
-        }
-        
+        buttonAction(button: yqBtn)
     }
     
     
+    @IBAction func kzBtnAction(_ sender: UIButton) {
+        buttonAction(button: kzBtn)
+    }
+    
     @IBAction func scBtnAction(_ sender: UIButton) {
-        if firstTouch == true{
-            startPlace = "Shacheng"
-            scBtn.setTitle("From", for: .normal)
-            firstTouch = false
-            scBtn.isEnabled = false
-        }else{
-            destinationPlace = "Shacheng"
-            scBtn.setTitle("To", for: .normal)
-            firstTouch = true
-            updateDisplayTable(strt: startPlace, dest: destinationPlace, northBound: northBoundCheck(start: startPlace, end: destinationPlace))
-            enableAllBtns()
-        }
+        buttonAction(button: scBtn)
     }
 }
 
