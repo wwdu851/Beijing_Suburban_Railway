@@ -10,45 +10,35 @@ import UIKit
 
 class DetailTableViewController: UITableViewController {
     
-    var trainNumber = 0
-    var start = ""
-    var timeLeaveStart = ""
-    var destination = ""
-    var timeArriveDestination = ""
-    var firstStop = ""
-    var timeLeaveFirst = ""
-    var secondStop = ""
-    var timeLeaveSecond = ""
-    var thirdStop = ""
-    var timeLeaveThird = ""
-    
-    var stationList = ["Huangtudian","Nankou","Badaling","Yanqing","Kangzhuang","Shacheng"]
+    var trainNumber = 203
+    var start = "Huangtudian"
+    var destination = "Yanqing"
+    var startTime = 0
+    var destinationTime = 0
+
+    var stationList = [Stop]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.title = String(trainNumber)
-//        self.navigationController?.navigationBar
-        stationList.append("\(start)    \(timeLeaveStart)")
-        if firstStop != "na"{
-            stationList.append("\(firstStop)    \(timeLeaveFirst)")
+        let tempStation = ScheduleInit.trainInfoWithNumber(trainNumber: trainNumber, from: start, to: destination)
+        for eachStation in tempStation{
+            if eachStation.stopsAt!.stationName == start{
+                startTime = Int((eachStation.hour * 60) + (eachStation.minute))
+            }
+            
+            if eachStation.stopsAt!.stationName == destination{
+                destinationTime = Int((eachStation.hour * 60) + (eachStation.minute))
+            }
         }
-        
-        if secondStop != "na"{
-            stationList.append("\(secondStop)    \(timeLeaveSecond)")
+
+        for index in 0...(tempStation.count - 1){
+            if ((tempStation[index].hour * 60) + (tempStation[index].minute)) >= startTime && ((tempStation[index].hour * 60) + (tempStation[index].minute)) <= destinationTime{
+                stationList.append(tempStation[index])
+            }
         }
-        
-        if thirdStop != "na"{
-            stationList.append("\(thirdStop)    \(timeLeaveThird)")
-        }
-        
-        stationList.append("\(destination)    \(timeArriveDestination)")
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,8 +61,7 @@ class DetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
-        cell.timePlace.text = self.stationList[indexPath.row]
-        
+        cell.timePlace.text = "\(self.stationList[indexPath.row].stopsAt!.stationName!) \(String(self.stationList[indexPath.row].hour)):\(timeLikeDigit(number: Int(self.stationList[indexPath.row].minute)))"
         return cell
     }
 
@@ -120,5 +109,13 @@ class DetailTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func timeLikeDigit(number:Int) -> String{
+        if number < 10{
+            return "0\(String(number))"
+        }else{
+            return String(number)
+        }
+    }
 
 }

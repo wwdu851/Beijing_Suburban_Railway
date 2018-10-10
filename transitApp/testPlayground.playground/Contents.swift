@@ -6,6 +6,11 @@ var str = "Hello, playground"
 
 var s = ["a","b"]
 
-if s.contains(where: { (<#String#>) -> Bool in
-    <#code#>
-})
+let numbers = [3, 7, 4, -2, 9, -6, 10, 1]
+if let firstNegative = numbers.first(where: { $0 > 6 }) {
+    print("The first negative number is \(firstNegative).")
+}
+
+
+
+// Prints "The first negative number is -2."

@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Stop" representedClassName="Stop" syncable="YES" codeGenerationType="class">
+        <attribute name="hour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="minute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="stopsAt" maxCount="1" deletionRule="Nullify" destinationEntity="Train_station" inverseName="hasStops" inverseEntity="Train_station" syncable="YES"/>
+    </entity>
+    <entity name="Train_line" representedClassName="Train_line" syncable="YES" codeGenerationType="class">
+        <attribute name="lineName" attributeType="String" syncable="YES"/>
+        <relationship name="hasRuns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Train_run" inverseName="inLine" inverseEntity="Train_run" syncable="YES"/>
+        <relationship name="hasStations" toMany="YES" deletionRule="Nullify" destinationEntity="Train_station" inverseName="inLine" inverseEntity="Train_station" syncable="YES"/>
+    </entity>
+    <entity name="Train_run" representedClassName="Train_run" syncable="YES" codeGenerationType="class">
+        <attribute name="trainNumber" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="weekdayService" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="hasStops" toMany="YES" deletionRule="Nullify" destinationEntity="Stop" syncable="YES"/>
+        <relationship name="inLine" maxCount="1" deletionRule="Nullify" destinationEntity="Train_line" inverseName="hasRuns" inverseEntity="Train_line" syncable="YES"/>
+    </entity>
+    <entity name="Train_station" representedClassName="Train_station" syncable="YES" codeGenerationType="class">
+        <attribute name="stationName" attributeType="String" syncable="YES"/>
+        <relationship name="hasRuns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Train_run" syncable="YES"/>
+        <relationship name="hasStops" toMany="YES" deletionRule="Nullify" destinationEntity="Stop" inverseName="stopsAt" inverseEntity="Stop" syncable="YES"/>
+        <relationship name="inLine" maxCount="1" deletionRule="Nullify" destinationEntity="Train_line" inverseName="hasStations" inverseEntity="Train_line" syncable="YES"/>
+        <relationship name="nextStation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Train_station" inverseName="prevStation" inverseEntity="Train_station" syncable="YES"/>
+        <relationship name="prevStation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Train_station" inverseName="nextStation" inverseEntity="Train_station" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Stop" positionX="-9" positionY="119" width="128" height="90"/>
+        <element name="Train_line" positionX="-9" positionY="9" width="128" height="90"/>
+        <element name="Train_run" positionX="297" positionY="20" width="128" height="105"/>
+        <element name="Train_station" positionX="178" positionY="216" width="128" height="135"/>
+    </elements>
 </model>

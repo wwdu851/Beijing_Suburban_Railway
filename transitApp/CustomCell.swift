@@ -15,9 +15,15 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var endTime: UILabel!
     @IBOutlet weak var endPlace: UILabel!
     
+    @IBOutlet weak var firstLine: UILabel!
+    @IBOutlet weak var secondLine: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
+    
     override func awakeFromNib() {
+        // stackView.layer.cornerRadius = 5
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
