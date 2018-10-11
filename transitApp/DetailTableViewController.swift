@@ -61,10 +61,9 @@ class DetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
-        cell.timePlace.text = "\(self.stationList[indexPath.row].stopsAt!.stationName!) \(String(self.stationList[indexPath.row].hour)):\(timeLikeDigit(number: Int(self.stationList[indexPath.row].minute)))"
+        cell.timePlace.text = "\(NSLocalizedString(self.stationList[indexPath.row].stopsAt!.stationName!, comment: "列车信息")) \(String(self.stationList[indexPath.row].hour)):\(timeLikeDigit(number: Int(self.stationList[indexPath.row].minute)))"
         return cell
     }
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

@@ -31,6 +31,7 @@
 		3D72BD1E1F270CF800D7039D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D72BD1D1F270CF800D7039D /* MapKit.framework */; };
 		3DA3093B205627550066C936 /* ScheduleInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA3093A205627550066C936 /* ScheduleInit.swift */; };
 		3DA3093D205636AB0066C936 /* mapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA3093C205636AB0066C936 /* mapViewController.swift */; };
+		3DC4EEF4216DC18900AEAC42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC4EEF6216DC18900AEAC42 /* Localizable.strings */; };
 		3DD9583B1F321F0B0012D620 /* train.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD9583A1F321F0B0012D620 /* train.swift */; };
 		3DE51CD520C65C4F002E6DFE /* CustomAnnotationCalloutXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DE51CD420C65C4F002E6DFE /* CustomAnnotationCalloutXib.xib */; };
 		3DE51D1620C71BDB002E6DFE /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE51D1520C71BDB002E6DFE /* CustomCalloutView.swift */; };
@@ -107,6 +108,10 @@
 		3D72BD1D1F270CF800D7039D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3DA3093A205627550066C936 /* ScheduleInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInit.swift; sourceTree = "<group>"; };
 		3DA3093C205636AB0066C936 /* mapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapViewController.swift; sourceTree = "<group>"; };
+		3DC4EEEF216DC13300AEAC42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		3DC4EEF0216DC13400AEAC42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		3DC4EEF1216DC13400AEAC42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		3DC4EEF5216DC18900AEAC42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3DD9583A1F321F0B0012D620 /* train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = train.swift; sourceTree = "<group>"; };
 		3DE51CD420C65C4F002E6DFE /* CustomAnnotationCalloutXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAnnotationCalloutXib.xib; sourceTree = "<group>"; };
 		3DE51D1520C71BDB002E6DFE /* CustomCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalloutView.swift; sourceTree = "<group>"; };
@@ -195,6 +200,7 @@
 				3D008CEF20CAF73100E15687 /* StationInformationViewController.swift */,
 				3D04B9E620D8BC220062C69D /* BottomDetailViewController.swift */,
 				3D04B9E720D8BC220062C69D /* BottomDetailViewController.xib */,
+				3DC4EEF6216DC18900AEAC42 /* Localizable.strings */,
 			);
 			path = transitApp;
 			sourceTree = "<group>";
@@ -374,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D04B9E920D8BC220062C69D /* BottomDetailViewController.xib in Resources */,
+				3DC4EEF4216DC18900AEAC42 /* Localizable.strings in Resources */,
 				3DE51CD520C65C4F002E6DFE /* CustomAnnotationCalloutXib.xib in Resources */,
 				3D38F38F1F26E44A00E05B75 /* LaunchScreen.storyboard in Resources */,
 				3D38F38C1F26E44A00E05B75 /* Assets.xcassets in Resources */,
@@ -478,6 +485,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3D38F3861F26E44A00E05B75 /* Base */,
+				3DC4EEEF216DC13300AEAC42 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -486,6 +494,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3D38F38E1F26E44A00E05B75 /* Base */,
+				3DC4EEF0216DC13400AEAC42 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -494,8 +503,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				3D4CECC220C9B6EA000A845F /* Base */,
+				3DC4EEF1216DC13400AEAC42 /* zh-Hans */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		3DC4EEF6216DC18900AEAC42 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3DC4EEF5216DC18900AEAC42 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -505,6 +523,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -564,6 +583,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

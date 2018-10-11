@@ -1,0 +1,122 @@
+
+/* Class = "UIButton"; normalTitle = "Yanqing"; ObjectID = "1g5-hn-GZr"; */
+"1g5-hn-GZr.normalTitle" = "延庆";
+
+/* Class = "UILabel"; text = "Origin"; ObjectID = "2cY-mo-LjG"; */
+"2cY-mo-LjG.text" = "从";
+
+/* Class = "UIButton"; normalTitle = "Nankou"; ObjectID = "41t-PD-MZV"; */
+"41t-PD-MZV.normalTitle" = "南口";
+
+/* Class = "UILabel"; text = "Huangtudian"; ObjectID = "55Q-bK-rrr"; */
+"55Q-bK-rrr.text" = "黄土店";
+
+/* Class = "UIButton"; normalTitle = "Kangzhuang"; ObjectID = "5RU-wF-nHG"; */
+"5RU-wF-nHG.normalTitle" = "康庄";
+
+/* Class = "UIButton"; normalTitle = "Wed"; ObjectID = "5Sl-TI-dof"; */
+"5Sl-TI-dof.normalTitle" = "三";
+
+/* Class = "UIButton"; normalTitle = "Shacheng"; ObjectID = "7kl-cE-vdC"; */
+"7kl-cE-vdC.normalTitle" = "沙城";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "86N-yc-69Z"; */
+"86N-yc-69Z.title" = "设置";
+
+/* Class = "UITabBarItem"; title = "System Map"; ObjectID = "89H-VF-vAL"; */
+"89H-VF-vAL.title" = "System Map";
+
+/* Class = "UINavigationItem"; title = "System Map"; ObjectID = "8MO-3B-3Dc"; */
+"8MO-3B-3Dc.title" = "System Map";
+
+/* Class = "UILabel"; text = "Destination"; ObjectID = "8YO-2q-eMU"; */
+"8YO-2q-eMU.text" = "到";
+
+/* Class = "UILabel"; text = "¥8"; ObjectID = "Eno-jd-UQc"; */
+"Eno-jd-UQc.text" = "¥8";
+
+/* Class = "UIButton"; normalTitle = "Kangzhuang"; ObjectID = "EqJ-N0-cEy"; */
+"EqJ-N0-cEy.normalTitle" = "康庄";
+
+/* Class = "UIButton"; normalTitle = "Huangtudian "; ObjectID = "G2T-Gr-Rcz"; */
+"G2T-Gr-Rcz.normalTitle" = "延庆";
+
+/* Class = "UIButton"; normalTitle = "Load Data"; ObjectID = "GIW-Z3-cO8"; */
+"GIW-Z3-cO8.normalTitle" = "Load Data";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "Gz2-Yi-UkA"; */
+"Gz2-Yi-UkA.title" = "Detail";
+
+/* Class = "UILabel"; text = "Huangtudian    22:55"; ObjectID = "HQC-xH-cYX"; */
+"HQC-xH-cYX.text" = "Huangtudian    22:55";
+
+/* Class = "UIButton"; normalTitle = "Shacheng"; ObjectID = "Ihs-HA-VN6"; */
+"Ihs-HA-VN6.normalTitle" = "沙城";
+
+/* Class = "UILabel"; text = "Line S2"; ObjectID = "Iup-TY-aMy"; */
+"Iup-TY-aMy.text" = "S2线";
+
+/* Class = "UIButton"; normalTitle = "Nankou"; ObjectID = "JrR-et-w0A"; */
+"JrR-et-w0A.normalTitle" = "南口";
+
+/* Class = "UIButton"; normalTitle = "Thu"; ObjectID = "KZa-F0-at4"; */
+"KZa-F0-at4.normalTitle" = "四";
+
+/* Class = "UIButton"; normalTitle = "Core Data Test"; ObjectID = "Oei-Rf-mdy"; */
+"Oei-Rf-mdy.normalTitle" = "Core Data Test";
+
+/* Class = "UILabel"; text = "›"; ObjectID = "ShG-V0-TFx"; */
+"ShG-V0-TFx.text" = "›";
+
+/* Class = "UIButton"; normalTitle = "Badaling"; ObjectID = "TmT-op-oku"; */
+"TmT-op-oku.normalTitle" = "八达岭";
+
+/* Class = "UIButton"; normalTitle = "Badaling"; ObjectID = "UI3-sc-eU1"; */
+"UI3-sc-eU1.normalTitle" = "八达岭";
+
+/* Class = "UILabel"; text = "08:40"; ObjectID = "UTD-Vq-G1e"; */
+"UTD-Vq-G1e.text" = "08:40";
+
+/* Class = "UIButton"; normalTitle = "Sun"; ObjectID = "Wji-Ya-Kgt"; */
+"Wji-Ya-Kgt.normalTitle" = "日";
+
+/* Class = "UIButton"; normalTitle = "Yanqing"; ObjectID = "Ytp-kF-1ce"; */
+"Ytp-kF-1ce.normalTitle" = "黄土店";
+
+/* Class = "UILabel"; text = "Huangtudian"; ObjectID = "bwJ-k2-kuw"; */
+"bwJ-k2-kuw.text" = "黄土店";
+
+/* Class = "UIButton"; normalTitle = "Sat"; ObjectID = "c87-oU-LHj"; */
+"c87-oU-LHj.normalTitle" = "六";
+
+/* Class = "UILabel"; text = "10:06"; ObjectID = "fwq-la-BPZ"; */
+"fwq-la-BPZ.text" = "10:06";
+
+/* Class = "UIButton"; normalTitle = "Directions"; ObjectID = "gL2-0P-p8m"; */
+"gL2-0P-p8m.normalTitle" = "导航";
+
+/* Class = "UIViewController"; title = "Huangtudian Station"; ObjectID = "hfQ-8G-wxw"; */
+"hfQ-8G-wxw.title" = "Huangtudian Station";
+
+/* Class = "UINavigationItem"; title = "Transit"; ObjectID = "hw6-Az-zAx"; */
+"hw6-Az-zAx.title" = "Transit";
+
+/* Class = "UIButton"; normalTitle = "Tue"; ObjectID = "q3D-ig-ZUJ"; */
+"q3D-ig-ZUJ.normalTitle" = "二";
+
+/* Class = "UIButton"; normalTitle = "Mon"; ObjectID = "rIe-oM-21N"; */
+"rIe-oM-21N.normalTitle" = "一";
+
+/* Class = "UIButton"; normalTitle = "Huangtudian"; ObjectID = "uUl-DS-2Gi"; */
+"uUl-DS-2Gi.normalTitle" = "黄土店";
+
+/* Class = "UIButton"; normalTitle = "Fri"; ObjectID = "zlt-7G-FPj"; */
+"zlt-7G-FPj.normalTitle" = "五";
+
+"BKw-SV-3qF.text" = "每一天的时刻表是不同的。您希望在哪一天乘车呢？";
+
+"W0P-cE-6NO.text" = "请在这里或地图上选取起点站和终点站";
+
+"Gz2-hU-vyM.normalTitle" = "显示时刻表";
+
+

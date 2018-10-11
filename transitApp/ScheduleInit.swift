@@ -942,26 +942,53 @@ struct ScheduleInit {
         } catch {
             print("Error encountered when fetching train info with train number")
         }
-        
-//        print(returnSet.count)
-//        
-//        for each in 0...returnSet.count - 1{
-//            print(each)
-//            if returnSet[each].stopsAt!.stationName! == from{
-//                break
-//            }else{
-//                returnSet.remove(at: each)
-//            }
-//        }
-//        
-//        for each in (0...returnSet.count - 1).reversed(){
-//            if returnSet[each].stopsAt!.stationName! == to{
-//                break
-//            }else{
-//                returnSet.remove(at: each)
-//            }
-//        }
-
         return returnSet
+    }
+    static func calculatePrice(from:String,to:String) -> String{
+        var returnString = ""
+        var price = 0
+        let assosciationTable = [("Huangtudian",0),("Nankou",30),("Badaling",51),("Yanqing",64),("Kangzhuang",60),("Shacheng",60)]
+        var startNumber = 1001
+        var endNumber = 1001
+        for each in assosciationTable{
+            if each.0 == from{
+                startNumber = each.1
+            }
+            if each.0 == to{
+                endNumber = each.1
+            }
+        }
+        
+        if startNumber != 1001 && endNumber != 1001{
+            let difference = abs(endNumber - startNumber)
+            switch difference{
+            case 0:
+                price = 0
+            case 1...6:
+                price = 3
+            case 6...12:
+                price = 4
+            case 12...22:
+                price = 5
+            case 22...32:
+                price = 6
+            case 32...:
+                price = Int(((difference - 32) / 20)) + 7
+            default:
+                break
+            }
+        }
+        
+        if to == "Shacheng" && from != "Shacheng"{
+            price += 10
+        }
+        
+        if to != "Shacheng" && from == "Shacheng"{
+            price += 10
+        }
+        
+        returnString = "¥\(price)"
+        
+        return returnString
     }
 }

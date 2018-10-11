@@ -15,14 +15,18 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var endTime: UILabel!
     @IBOutlet weak var endPlace: UILabel!
     
+    @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var firstLine: UILabel!
     @IBOutlet weak var secondLine: UILabel!
     @IBOutlet weak var stackView: UIStackView!
+    
+    @IBOutlet weak var lineName: UILabel!
     
     override func awakeFromNib() {
         // stackView.layer.cornerRadius = 5
         super.awakeFromNib()
         // Initialization code
+        lineName.text = NSLocalizedString("Line S2", comment: "s2xian")
         
     }
 

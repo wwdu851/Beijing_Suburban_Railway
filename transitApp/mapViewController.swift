@@ -23,22 +23,19 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let locationManager = CLLocationManager()
     var coordinate = CLLocationCoordinate2D()
     var centerCoordinate = CLLocationCoordinate2D()
-    var startStation = ""
-    var destinationStation = ""
+    var startStation = "Huangtudian"
+    var destinationStation = "Yanqing"
     var currentClicked = ""
     var currentTitle = "Destination"
+    var selectedFromMap = false
+    var selectedOrigin = false
+    var selectedDestination = false
+    
     
     @IBOutlet weak var mapView: MKMapView!
     
     @IBAction func currentButtonAction(_ sender: UIButton) {
         
-    }
-    
-    @IBAction func goAction(_ sender: UIButton) {
-        performSegue(withIdentifier: "showSchedule", sender: nil)
-        startStation = ""
-        destinationStation = ""
-        currentTitle = "Destination"
     }
     
     
@@ -84,6 +81,11 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.title = NSLocalizedString("System Map", comment: "xianlutu")
+        self.navigationItem.title = NSLocalizedString("BSR System Map", comment: "xianlutu")
+        
+        
         mapView.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -118,7 +120,7 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let pin = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-        let transfer_pinImage = #imageLiteral(resourceName: "transfer")
+        let transfer_pinImage = #imageLiteral(resourceName: "s2_station")
         let s2_pinImage = #imageLiteral(resourceName: "s2_station")
         
         
@@ -144,8 +146,10 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let customView = (Bundle.main.loadNibNamed("CustomAnnotationCalloutXib", owner: self, options: nil))?[0] as! CustomCalloutView
         
         let subtitle = annotation.subtitle!!
+        print("current subtitle:\(subtitle)")
         
-        customView.stationLabel.text = subtitle
+        customView.stationName = subtitle
+        customView.stationLabel.text = NSLocalizedString(subtitle, comment: "Subtitle")
         customView.currentClicked = annotation.subtitle!!
         
         customView.delegate = self
@@ -158,14 +162,14 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         delegate = customView
         
         if transferStation.contains(subtitle) {
-            customView.first_line_label.text = "Line S2"
+            customView.first_line_label.text = NSLocalizedString("Line S2", comment: "XIANLUMING")
 //            customView.second_line_label.text = "Line S5"
             customView.first_line_label.backgroundColor = #colorLiteral(red: 0.0431372549, green: 0.1411764706, blue: 0.9843137255, alpha: 1)
 //            customView.second_line_label.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
             customView.second_line_label.isHidden = true
             customView.third_line_label.isHidden = true
         } else if s2StationArray.contains(subtitle) {
-            customView.first_line_label.text = "Line S2"
+            customView.first_line_label.text = NSLocalizedString("Line S2", comment: "XIANLUMING")
             customView.first_line_label.backgroundColor = #colorLiteral(red: 0.0431372549, green: 0.1411764706, blue: 0.9843137255, alpha: 1)
             customView.second_line_label.isHidden = true
             customView.third_line_label.isHidden = true
@@ -193,20 +197,30 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return
         }
         if destinationStation == "" {
-            calloutView.directionButtonOutlet.setTitle("Destination", for: .normal)
+            calloutView.directionButtonOutlet.setTitle(NSLocalizedString("Destination", comment: "zhongdianzhan"), for: .normal)
         } else {
-            calloutView.directionButtonOutlet.setTitle("From", for: .normal)
+            calloutView.directionButtonOutlet.setTitle(NSLocalizedString("From", comment: "cong"), for: .normal)
         }
     }
 
     func directionButtonTapped(_ calloutView: CustomCalloutView) {
         let s2StationAnnotationArray = [huangtudianStationAnnotation,nankouStationAnnotation,badalingStationAnnotation,yanqingStationAnnotation,kangzhuangStationAnnotation,shachengStationAnnotation]
-        let stationSelected = calloutView.stationLabel.text!
-        if destinationStation == "" {
+        let stationSelected = calloutView.stationName
+        if selectedFromMap == false {
             destinationStation = stationSelected
+            changeButtonSequence(station: stationSelected, type: "destination")
             currentTitle = "From"
+            selectedFromMap = true
         } else {
-            startStation = stationSelected
+            if stationSelected != destinationStation{
+                startStation = stationSelected
+                changeButtonSequence(station: stationSelected, type: "origin")
+                currentTitle = "Destination"
+                selectedFromMap = false
+                self.performSegue(withIdentifier: "showSchedule", sender: nil)
+            }else{
+                checkDuplicateStation()
+            }
             
         }
         for annotation in s2StationAnnotationArray{
@@ -234,6 +248,14 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         return returnValue
     }
+    
+    func checkDuplicateStation(){
+        let alertController = UIAlertController(title: NSLocalizedString("Opps!", comment: ""), message: NSLocalizedString("You've selected duplicated station. Want to start over?", comment: ""), preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: NSLocalizedString("Okay", comment: ""), style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSchedule"{
@@ -241,33 +263,428 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             destVC.startPlace = startStation
             destVC.destinationPlace = destinationStation
             destVC.trainDirection = determineTrainDirection(from: startStation, to: destinationStation)
+            changeButtonSequence(station: "Huangtudian", type: "origin")
+            changeButtonSequence(station: "Yanqing", type: "destination")
+            self.startStation = "Huangtudian"
+            self.destinationStation = "Yanqing"
         }
      }
+    
+    // SELECTION STACK
+    
     
     
     @IBOutlet weak var originSelectionStackView: UIStackView!
     @IBAction func handleOriginSelection(_ sender: UIButton) {
+        if originStationButtons.first?.isHidden == false{
+            switch sender.tag{
+            case 1:
+                self.startStation = "Huangtudian"
+            case 2:
+                self.startStation = "Nankou"
+            case 3:
+                self.startStation = "Badaling"
+            case 4:
+                self.startStation = "Yanqing"
+            case 5:
+                self.startStation = "Kangzhuang"
+            case 6:
+                self.startStation = "Shacheng"
+            default:
+                break
+            }
+        }
         originStationButtons.forEach { (button) in
-            button.isHidden = !button.isHidden
-            
+            UIView.animate(withDuration: 0.2, animations: {
+                button.isHidden = !button.isHidden
+            })
         }
     }
     
     @IBOutlet var originStationButtons: [UIButton]!
     
-    @IBAction func stationTapped(_ sender: UIButton) { //OriginStationTapped
+    @IBOutlet weak var originFirstButton: UIButton!
+    
+    func changeButtonSequence(station:String,type:String){
+        if type == "origin"{
+            switch station {
+            case "Huangtudian":
+                originFirstButton.setTitle("Huangtudian", for: .normal)
+                originFirstButton.tag = 1
+                let stations = ["Nankou","Badaling","Yanqing","Kangzhuang","Shacheng"]
+                let tags = [2,3,4,5,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stations[counter], for: .normal)
+                    button.tag = tags[counter]
+                    counter += 1
+                }
+            case "Nankou":
+                originFirstButton.setTitle("Nankou", for: .normal)
+                originFirstButton.tag = 2
+                let stations = ["Huangtudian","Badaling","Yanqing","Kangzhuang","Shacheng"]
+                let tags = [1,3,4,5,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stations[counter], for: .normal)
+                    button.tag = tags[counter]
+                    counter += 1
+                }
+            case "Badaling":
+                originFirstButton.setTitle("Badaling", for: .normal)
+                originFirstButton.tag = 3
+                let stations = ["Nankou","Huangtudian","Yanqing","Kangzhuang","Shacheng"]
+                let tags = [2,1,4,5,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stations[counter], for: .normal)
+                    button.tag = tags[counter]
+                    counter += 1
+                }
+                
+            case "Yanqing":
+                originFirstButton.setTitle("Yanqing", for: .normal)
+                originFirstButton.tag = 4
+                let stations = ["Nankou","Badaling","Huangtudian","Kangzhuang","Shacheng"]
+                let tags = [2,3,1,5,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stations[counter], for: .normal)
+                    button.tag = tags[counter]
+                    counter += 1
+                }
+            case "Kangzhuang":
+                originFirstButton.setTitle("Kangzhuang", for: .normal)
+                originFirstButton.tag = 5
+                let stations = ["Nankou","Badaling","Yanqing","Huangtudian","Shacheng"]
+                let tags = [2,3,4,1,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stations[counter], for: .normal)
+                    button.tag = tags[counter]
+                    counter += 1
+                }
+            case "Shacheng":
+                originFirstButton.setTitle("Shacheng", for: .normal)
+                originFirstButton.tag = 6
+                let stations = ["Nankou","Badaling","Yanqing","Kangzhuang","Huangtudian"]
+                let tags = [2,3,4,5,1]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stations[counter], for: .normal)
+                    button.tag = tags[counter]
+                    counter += 1
+                }
+            default:
+                break
+            }
+        }else{
+            if type == "destination"{
+                switch station {
+                case "Huangtudian":
+                    destinationFirstButton.setTitle("Huangtudian", for: .normal)
+                    destinationFirstButton.tag = 1
+                    let stations = ["Nankou","Badaling","Yanqing","Kangzhuang","Shacheng"]
+                    let tags = [2,3,4,5,6]
+                    var counter = 0
+                    destinationButtons.forEach { (button) in
+                        button.setTitle(stations[counter], for: .normal)
+                        button.tag = tags[counter]
+                        counter += 1
+                    }
+                case "Nankou":
+                    destinationFirstButton.setTitle("Nankou", for: .normal)
+                    destinationFirstButton.tag = 2
+                    let stations = ["Huangtudian","Badaling","Yanqing","Kangzhuang","Shacheng"]
+                    let tags = [1,3,4,5,6]
+                    var counter = 0
+                    destinationButtons.forEach { (button) in
+                        button.setTitle(stations[counter], for: .normal)
+                        button.tag = tags[counter]
+                        counter += 1
+                    }
+                case "Badaling":
+                    destinationFirstButton.setTitle("Badaling", for: .normal)
+                    destinationFirstButton.tag = 3
+                    let stations = ["Nankou","Huangtudian","Yanqing","Kangzhuang","Shacheng"]
+                    let tags = [2,1,4,5,6]
+                    var counter = 0
+                    destinationButtons.forEach { (button) in
+                        button.setTitle(stations[counter], for: .normal)
+                        button.tag = tags[counter]
+                        counter += 1
+                    }
+                    
+                case "Yanqing":
+                    destinationFirstButton.setTitle("Yanqing", for: .normal)
+                    destinationFirstButton.tag = 4
+                    let stations = ["Nankou","Badaling","Huangtudian","Kangzhuang","Shacheng"]
+                    let tags = [2,3,1,5,6]
+                    var counter = 0
+                    destinationButtons.forEach { (button) in
+                        button.setTitle(stations[counter], for: .normal)
+                        button.tag = tags[counter]
+                        counter += 1
+                    }
+                case "Kangzhuang":
+                    destinationFirstButton.setTitle("Kangzhuang", for: .normal)
+                    destinationFirstButton.tag = 5
+                    let stations = ["Nankou","Badaling","Yanqing","Huangtudian","Shacheng"]
+                    let tags = [2,3,4,1,6]
+                    var counter = 0
+                    destinationButtons.forEach { (button) in
+                        button.setTitle(stations[counter], for: .normal)
+                        button.tag = tags[counter]
+                        counter += 1
+                    }
+                case "Shacheng":
+                    destinationFirstButton.setTitle("Shacheng", for: .normal)
+                    destinationFirstButton.tag = 6
+                    let stations = ["Nankou","Badaling","Yanqing","Kangzhuang","Huangtudian"]
+                    let tags = [2,3,4,5,1]
+                    var counter = 0
+                    destinationButtons.forEach { (button) in
+                        button.setTitle(stations[counter], for: .normal)
+                        button.tag = tags[counter]
+                        counter += 1
+                    }
+                default:
+                    break
+                }
+            }
+        }
+        
     }
     
-    
-    @IBAction func handleDestinationSelection(_ sender: UIButton) {
-        destinationButtons.forEach { (button) in
-            button.isHidden = !button.isHidden
+    @IBAction func stationTapped(_ sender: UIButton) { //OriginStationTapped
+        switch sender.tag {
+        case 1:
+            originFirstButton.tag = 1
+            originFirstButton.setTitle(NSLocalizedString("Huangtudian", comment: ""), for: .normal)
+            self.startStation = "Huangtudian"
+            let stationStringExcept1 = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+            let tagExcept1 = [2,3,4,5,6]
+            var counter = 0
+            originStationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            originStationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept1[counter], for: .normal)
+                button.tag = tagExcept1[counter]
+                counter += 1
+            }
+        case 2:
+            originFirstButton.tag = 2
+            originFirstButton.setTitle(NSLocalizedString("Nankou", comment: ""), for: .normal)
+            self.startStation = "Nankou"
+            let stationStringExcept2 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+            let tagExcept2 = [1,3,4,5,6]
+            var counter = 0
+            originStationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            originStationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept2[counter], for: .normal)
+                button.tag = tagExcept2[counter]
+                counter += 1
+            }
+        case 3:
+            originFirstButton.tag = 3
+            originFirstButton.setTitle(NSLocalizedString("Badaling", comment: ""), for: .normal)
+            self.startStation = "Badaling"
+            let stationStringExcept3 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+            let tagExcept3 = [1,2,4,5,6]
+            var counter = 0
+            originStationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            originStationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept3[counter], for: .normal)
+                button.tag = tagExcept3[counter]
+                counter += 1
+            }
+        case 4:
+            originFirstButton.tag = 4
+            originFirstButton.setTitle(NSLocalizedString("Yanqing", comment: ""), for: .normal)
+            self.startStation = "Yanqing"
+            let stationStringExcept4 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+            let tagExcept4 = [1,2,3,5,6]
+            var counter = 0
+            originStationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            originStationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept4[counter], for: .normal)
+                button.tag = tagExcept4[counter]
+                counter += 1
+            }
+        case 5:
+            originFirstButton.tag = 5
+            originFirstButton.setTitle(NSLocalizedString("Kangzhuang", comment: ""), for: .normal)
+            self.startStation = "Kangzhuang"
+            let stationStringExcept5 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+            let tagExcept5 = [1,2,3,4,6]
+            var counter = 0
+            originStationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            originStationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept5[counter], for: .normal)
+                button.tag = tagExcept5[counter]
+                counter += 1
+            }
+        case 6:
+            originFirstButton.tag = 6
+            originFirstButton.setTitle(NSLocalizedString("Shacheng", comment: ""), for: .normal)
+            self.startStation = "Shacheng"
+            let stationStringExcept6 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: "")]
+            let tagExcept6 = [1,2,3,4,5]
+            var counter = 0
+            originStationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            originStationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept6[counter], for: .normal)
+                button.tag = tagExcept6[counter]
+                counter += 1
+            }
+        default:
+            break
         }
     }
     
     
-    @IBOutlet var destinationButtons: [UIButton]!
+    @IBAction func handleDestinationSelection(_ sender: UIButton) {
+        if destinationButtons.first?.isHidden == false{
+            switch sender.tag{
+            case 1:
+                self.destinationStation = "Huangtudian"
+            case 2:
+                self.destinationStation = "Nankou"
+            case 3:
+                self.destinationStation = "Badaling"
+            case 4:
+                self.destinationStation = "Yanqing"
+            case 5:
+                self.destinationStation = "Kangzhuang"
+            case 6:
+                self.destinationStation = "Shacheng"
+            default:
+                break
+            }
+        }
+        destinationButtons.forEach { (button) in
+            UIView.animate(withDuration: 0.2, animations: {
+                button.isHidden = !button.isHidden
+            })
+        }
+    }
     
+    @IBOutlet weak var destinationFirstButton: UIButton!
+    
+    @IBAction func destinationStationTapped(_ sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            destinationFirstButton.tag = 1
+            destinationFirstButton.setTitle("Huangtudian", for: .normal)
+            self.destinationStation = "Huangtudian"
+            let stationStringExcept1 = ["Nankou","Badaling","Yanqing","Kangzhuang","Shacheng"]
+            let tagExcept1 = [2,3,4,5,6]
+            var counter = 0
+            destinationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            destinationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept1[counter], for: .normal)
+                button.tag = tagExcept1[counter]
+                counter += 1
+            }
+        case 2:
+            destinationFirstButton.tag = 2
+            destinationFirstButton.setTitle("Nankou", for: .normal)
+            self.destinationStation = "Nankou"
+            let stationStringExcept2 = ["Huangtudian","Badaling","Yanqing","Kangzhuang","Shacheng"]
+            let tagExcept2 = [1,3,4,5,6]
+            var counter = 0
+            destinationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            destinationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept2[counter], for: .normal)
+                button.tag = tagExcept2[counter]
+                counter += 1
+            }
+        case 3:
+            destinationFirstButton.tag = 3
+            destinationFirstButton.setTitle("Badaling", for: .normal)
+            self.destinationStation = "Badaling"
+            let stationStringExcept3 = ["Huangtudian","Nankou","Yanqing","Kangzhuang","Shacheng"]
+            let tagExcept3 = [1,2,4,5,6]
+            var counter = 0
+            destinationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            destinationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept3[counter], for: .normal)
+                button.tag = tagExcept3[counter]
+                counter += 1
+            }
+        case 4:
+            destinationFirstButton.tag = 4
+            destinationFirstButton.setTitle("Yanqing", for: .normal)
+            self.destinationStation = "Yanqing"
+            let stationStringExcept4 = ["Huangtudian","Nankou","Badaling","Kangzhuang","Shacheng"]
+            let tagExcept4 = [1,2,3,5,6]
+            var counter = 0
+            destinationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            destinationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept4[counter], for: .normal)
+                button.tag = tagExcept4[counter]
+                counter += 1
+            }
+        case 5:
+            destinationFirstButton.tag = 5
+            destinationFirstButton.setTitle("Kangzhuang", for: .normal)
+            self.destinationStation = "Kangzhuang"
+            let stationStringExcept5 = ["Huangtudian","Nankou","Badaling","Yanqing","Shacheng"]
+            let tagExcept5 = [1,2,3,4,6]
+            var counter = 0
+            destinationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            destinationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept5[counter], for: .normal)
+                button.tag = tagExcept5[counter]
+                counter += 1
+            }
+        case 6:
+            destinationFirstButton.tag = 6
+            destinationFirstButton.setTitle("Shacheng", for: .normal)
+            self.destinationStation = "Shacheng"
+            let stationStringExcept6 = ["Huangtudian","Nankou","Badaling","Yanqing","Kangzhuang"]
+            let tagExcept6 = [1,2,3,4,5]
+            var counter = 0
+            destinationButtons.forEach { (button) in
+                button.isHidden = true
+            }
+            destinationButtons.forEach { (button) in
+                button.setTitle(stationStringExcept6[counter], for: .normal)
+                button.tag = tagExcept6[counter]
+                counter += 1
+            }
+        default:
+            break
+        }
+    }
+    
+    
+    @IBAction func showButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "showSchedule", sender: nil)
+    }
+    
+    @IBOutlet var destinationButtons: [UIButton]!
     
     
     

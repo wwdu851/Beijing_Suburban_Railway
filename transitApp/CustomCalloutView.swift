@@ -36,6 +36,7 @@ class CustomCalloutView: UIView,mapViewControllerDelegate{
     var stationName = ""
     
     override func awakeFromNib() {
+        infoButtonOutlet.setTitle(NSLocalizedString("Information", comment: "xinxi"), for: .normal)
         self.layer.cornerRadius = 5
         infoButtonOutlet.layer.cornerRadius = 5
         directionButtonOutlet.layer.cornerRadius = 5
