@@ -12,7 +12,7 @@ class CDTestViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -20,15 +20,6 @@ class CDTestViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func testCoreData() {
-        ScheduleInit.trainFetch()
-    }
-    
-    @IBAction func loadData() {
-        ScheduleInit.trainInit()
-    }
-    
     
 
     /*

@@ -11,6 +11,7 @@
 		3D04B9E820D8BC220062C69D /* BottomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D04B9E620D8BC220062C69D /* BottomDetailViewController.swift */; };
 		3D04B9E920D8BC220062C69D /* BottomDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D04B9E720D8BC220062C69D /* BottomDetailViewController.xib */; };
 		3D050CD81F3461280077340B /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D050CD71F3461280077340B /* DetailTableViewController.swift */; };
+		3D28264E216F981900F35F82 /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D28264D216F981900F35F82 /* EmptyCell.swift */; };
 		3D38F3821F26E44A00E05B75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D38F3811F26E44A00E05B75 /* AppDelegate.swift */; };
 		3D38F3841F26E44A00E05B75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D38F3831F26E44A00E05B75 /* ViewController.swift */; };
 		3D38F3871F26E44A00E05B75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D38F3851F26E44A00E05B75 /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		3D04B9E620D8BC220062C69D /* BottomDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailViewController.swift; sourceTree = "<group>"; };
 		3D04B9E720D8BC220062C69D /* BottomDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomDetailViewController.xib; sourceTree = "<group>"; };
 		3D050CD71F3461280077340B /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		3D28264D216F981900F35F82 /* EmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
 		3D38F37E1F26E44A00E05B75 /* transitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D38F3811F26E44A00E05B75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D38F3831F26E44A00E05B75 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				3D38F3901F26E44A00E05B75 /* Info.plist */,
 				3D38F3881F26E44A00E05B75 /* transitApp.xcdatamodeld */,
 				3D52CC9D1F2B234800591583 /* CustomCell.swift */,
+				3D28264D216F981900F35F82 /* EmptyCell.swift */,
 				3D52CC9F1F2B910500591583 /* timeTable.swift */,
 				3DD9583A1F321F0B0012D620 /* train.swift */,
 				3D050CD71F3461280077340B /* DetailTableViewController.swift */,
@@ -426,6 +429,7 @@
 				3D52CC9E1F2B234800591583 /* CustomCell.swift in Sources */,
 				3D050CD81F3461280077340B /* DetailTableViewController.swift in Sources */,
 				3D38F3841F26E44A00E05B75 /* ViewController.swift in Sources */,
+				3D28264E216F981900F35F82 /* EmptyCell.swift in Sources */,
 				3DA3093D205636AB0066C936 /* mapViewController.swift in Sources */,
 				3D4A02FF203B680200E90D0D /* StationInfoViewController.swift in Sources */,
 				3DD9583B1F321F0B0012D620 /* train.swift in Sources */,
@@ -641,7 +645,7 @@
 				INFOPLIST_FILE = transitApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = space.williamdu.transitApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.williamdu.transitApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -657,7 +661,7 @@
 				INFOPLIST_FILE = transitApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = space.williamdu.transitApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.williamdu.transitApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -735,7 +739,7 @@
 				INFOPLIST_FILE = transitApp_widget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "space.williamdu.transitApp.transitApp-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.williamdu.transitApp.transitApp-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -752,7 +756,7 @@
 				INFOPLIST_FILE = transitApp_widget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "space.williamdu.transitApp.transitApp-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.williamdu.transitApp.transitApp-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;

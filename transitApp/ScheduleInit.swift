@@ -220,12 +220,12 @@ struct ScheduleInit {
         train_213_stop_2.minute = 32
         train_213_stop_2.stopsAt = nankou_station
 
-        train_213_stop_3.hour = 13
-        train_213_stop_3.minute = 53
+        train_213_stop_3.hour = 14
+        train_213_stop_3.minute = 19
         train_213_stop_3.stopsAt = badaling_station
         
         train_213_stop_4.hour = 14
-        train_213_stop_4.minute = 11
+        train_213_stop_4.minute = 36
         train_213_stop_4.stopsAt = yanqing_station
         
         train_213.addToHasStops([train_213_stop_1,train_213_stop_2,train_213_stop_3,train_213_stop_4])
@@ -909,7 +909,7 @@ struct ScheduleInit {
             print("Failed to fetch train data for 'AllTrainBeforeTime' function")
         }
         
-        filteredResult = filteredResult.sorted(by:{$0.trainNumber < $1.trainNumber})
+        filteredResult = filteredResult.sorted(by:{stopTimeOf(station: atStation, trainRun: $0) <= stopTimeOf(station: atStation, trainRun: $1)})
         for each in filteredResult{
             let stopList = each.hasStops!.allObjects as! [Stop]
             for eachStop in stopList{
@@ -944,6 +944,18 @@ struct ScheduleInit {
         }
         return returnSet
     }
+    
+    static func stopTimeOf(station:String,trainRun:Train_run) -> Int{
+        let stopsForRun = trainRun.hasStops?.allObjects as! [Stop]
+        var time = 0
+        for eachStop in stopsForRun{
+            if eachStop.stopsAt!.stationName! == station{
+                time = Int(eachStop.hour * 60 + eachStop.minute)
+            }
+        }
+        return time
+    }
+    
     static func calculatePrice(from:String,to:String) -> String{
         var returnString = ""
         var price = 0

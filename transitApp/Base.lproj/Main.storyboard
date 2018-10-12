@@ -526,6 +526,41 @@
                                             <segue destination="Afy-Xb-mlB" kind="show" identifier="showDetail" id="aqz-tB-A3h"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoResultCell" rowHeight="189" id="UAg-j0-EoY" customClass="EmptyCell" customModule="transitApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="319" width="414" height="189"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UAg-j0-EoY" id="Yq3-dC-Zvf">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="188.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngk-z9-6zG">
+                                                    <rect key="frame" x="30" y="36.5" width="354" height="36"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                    <color key="textColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We couldn't find the matching train result. Please try a different weekday or reselect the origin and destination station." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdV-bV-4RK">
+                                                    <rect key="frame" x="30" y="82.5" width="354" height="61"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ngk-z9-6zG" secondAttribute="trailing" constant="10" id="2Au-wu-Z7v"/>
+                                                <constraint firstItem="ngk-z9-6zG" firstAttribute="centerY" secondItem="Yq3-dC-Zvf" secondAttribute="centerY" constant="-40" id="Twc-xi-wZY"/>
+                                                <constraint firstItem="bdV-bV-4RK" firstAttribute="leading" secondItem="Yq3-dC-Zvf" secondAttribute="leadingMargin" constant="10" id="Xc4-st-pZA"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bdV-bV-4RK" secondAttribute="trailing" constant="10" id="Z3M-LB-t8t"/>
+                                                <constraint firstItem="bdV-bV-4RK" firstAttribute="top" secondItem="ngk-z9-6zG" secondAttribute="bottom" constant="10" id="aZS-53-tQm"/>
+                                                <constraint firstItem="ngk-z9-6zG" firstAttribute="leading" secondItem="Yq3-dC-Zvf" secondAttribute="leadingMargin" constant="10" id="piL-Xc-4gV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="10" leading="10" bottom="10" trailing="10"/>
+                                        <connections>
+                                            <outlet property="contentOutlet" destination="bdV-bV-4RK" id="ZoS-J9-ce7"/>
+                                            <outlet property="titleOutlet" destination="ngk-z9-6zG" id="SbU-Gn-D0r"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="HFP-GF-gUP"/>
@@ -565,28 +600,6 @@
                     <view key="view" contentMode="scaleToFill" id="bVO-Kb-ibn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oei-Rf-mdy">
-                                <rect key="frame" x="136" y="129" width="102" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Core Data Test">
-                                    <color key="titleColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="testCoreData" destination="JUn-h1-LHB" eventType="touchUpInside" id="3Q6-1b-R6I"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIW-Z3-cO8">
-                                <rect key="frame" x="152" y="207" width="70" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Load Data">
-                                    <color key="titleColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="loadData" destination="JUn-h1-LHB" eventType="touchUpInside" id="3x8-WN-wgW"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="WjQ-Dp-45w"/>
                     </view>

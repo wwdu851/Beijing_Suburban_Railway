@@ -8,19 +8,21 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 protocol mapViewControllerDelegate:class {
     func changeTitle(_ currentTitle:String)
     func passOffStationName(_ mapView:mapViewController)
 }
 
-class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, CustomCalloutViewDelegate {
+class mapViewController: UIViewController, MKMapViewDelegate, CustomCalloutViewDelegate {
+    // CLLocationManagerDelegate
     func informationButtonTapped(_ calloutView: CustomCalloutView) {
         print("Information Tapped")
         
     }
     
-    let locationManager = CLLocationManager()
+//    let locationManager = CLLocationManager()
     var coordinate = CLLocationCoordinate2D()
     var centerCoordinate = CLLocationCoordinate2D()
     var startStation = "Huangtudian"
@@ -66,8 +68,8 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }()
     
     lazy var s5line: MKPolyline = {
-        let coordinate = [(40.071349, 116.364796),(40.071732, 116.311377),(40.078852, 116.292691),(40.141147, 116.255784)].map(CLLocationCoordinate2DMake)
-        return MKPolyline(coordinates: coordinate, count: coordinate.count)
+        let coordinates = [(40.071349, 116.364796),(40.071732, 116.311377),(40.078852, 116.292691),(40.141147, 116.255784)].map(CLLocationCoordinate2DMake)
+        return MKPolyline(coordinates: coordinates, count: coordinates.count)
     }()
     
     
@@ -87,20 +89,21 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         mapView.delegate = self
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestAlwaysAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.delegate = self
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.requestAlwaysAuthorization()
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        guard let newCoordinates = locationManager.location?.coordinate else {
-            return
-        }
+//        guard let newCoordinates = locationManager.location?.coordinate else {
+//            return
+//        }
         
         centerCoordinate = CLLocationCoordinate2D(latitude: 40.225323, longitude: 116.147442)
-        let region = MKCoordinateRegion.init(center: centerCoordinate, latitudinalMeters: 150000, longitudinalMeters: 150000)
+        let region = MKCoordinateRegion.init(center: CLLocationCoordinate2D(latitude: 40.225323, longitude: 116.147442), latitudinalMeters: 150000, longitudinalMeters: 150000)
+            //MKCoordinateRegion.init(center: centerCoordinate, latitudinalMeters: 150000, longitudinalMeters: 150000)
         mapView.setRegion(region, animated: true)
         
-        coordinate = newCoordinates
+//        coordinate = newCoordinates
         
         let s2StationAnnotationArray = [huangtudianStationAnnotation,nankouStationAnnotation,badalingStationAnnotation,yanqingStationAnnotation,kangzhuangStationAnnotation,shachengStationAnnotation]
         
@@ -112,6 +115,16 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         mapView.addOverlay(s2line)
         mapView.addOverlay(s2line_trunk)
+        
+        // Check Version
+        let userDefaults = UserDefaults.standard
+        
+        let currentVersion = userDefaults.string(forKey: "version") ?? "NOT_LOADED"
+        if currentVersion == "NOT_LOADED"{
+            ScheduleInit.trainInit()
+            userDefaults.set("2018OCT08", forKey: "version")
+        }
+
         
         // Core Data Test
 //        ScheduleInit.trainInfoWithNumber(trainNumber: 203, from: "Huangtudian", to: "Badaling")
@@ -196,21 +209,28 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         guard let calloutView = view.detailCalloutAccessoryView as? CustomCalloutView else{
             return
         }
-        if destinationStation == "" {
-            calloutView.directionButtonOutlet.setTitle(NSLocalizedString("Destination", comment: "zhongdianzhan"), for: .normal)
-        } else {
-            calloutView.directionButtonOutlet.setTitle(NSLocalizedString("From", comment: "cong"), for: .normal)
-        }
+//        if selectedDestination == false {
+//            calloutView.directionButtonOutlet.setTitle(NSLocalizedString("Destination", comment: "zhongdianzhan"), for: .normal)
+//            selectedDestination = true
+//        } else {
+//            calloutView.directionButtonOutlet.setTitle(NSLocalizedString("From", comment: "cong"), for: .normal)
+//            selectedDestination = false
+//        }
+        calloutView.directionButtonOutlet.setTitle(NSLocalizedString(currentTitle, comment: ""), for: .normal)
     }
 
     func directionButtonTapped(_ calloutView: CustomCalloutView) {
         let s2StationAnnotationArray = [huangtudianStationAnnotation,nankouStationAnnotation,badalingStationAnnotation,yanqingStationAnnotation,kangzhuangStationAnnotation,shachengStationAnnotation]
         let stationSelected = calloutView.stationName
         if selectedFromMap == false {
-            destinationStation = stationSelected
-            changeButtonSequence(station: stationSelected, type: "destination")
-            currentTitle = "From"
-            selectedFromMap = true
+            if stationSelected != startStation{
+                destinationStation = stationSelected
+                changeButtonSequence(station: stationSelected, type: "destination")
+                currentTitle = "From"
+                selectedFromMap = true
+            }else{
+                checkDuplicateStation()
+            }
         } else {
             if stationSelected != destinationStation{
                 startStation = stationSelected
@@ -256,6 +276,8 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.present(alertController, animated: true, completion: nil)
     }
     
+    
+    
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSchedule"{
@@ -267,6 +289,8 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             changeButtonSequence(station: "Yanqing", type: "destination")
             self.startStation = "Huangtudian"
             self.destinationStation = "Yanqing"
+            self.currentTitle = "Destination"
+            self.selectedFromMap = false
         }
      }
     
@@ -309,9 +333,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if type == "origin"{
             switch station {
             case "Huangtudian":
-                originFirstButton.setTitle("Huangtudian", for: .normal)
+                originFirstButton.setTitle(NSLocalizedString("Huangtudian", comment: ""), for: .normal)
                 originFirstButton.tag = 1
-                let stations = ["Nankou","Badaling","Yanqing","Kangzhuang","Shacheng"]
+                let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                 let tags = [2,3,4,5,6]
                 var counter = 0
                 originStationButtons.forEach { (button) in
@@ -320,9 +344,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     counter += 1
                 }
             case "Nankou":
-                originFirstButton.setTitle("Nankou", for: .normal)
+                originFirstButton.setTitle(NSLocalizedString("Nankou", comment: ""), for: .normal)
                 originFirstButton.tag = 2
-                let stations = ["Huangtudian","Badaling","Yanqing","Kangzhuang","Shacheng"]
+                let stations = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                 let tags = [1,3,4,5,6]
                 var counter = 0
                 originStationButtons.forEach { (button) in
@@ -331,9 +355,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     counter += 1
                 }
             case "Badaling":
-                originFirstButton.setTitle("Badaling", for: .normal)
+                originFirstButton.setTitle(NSLocalizedString("Badaling", comment: ""), for: .normal)
                 originFirstButton.tag = 3
-                let stations = ["Nankou","Huangtudian","Yanqing","Kangzhuang","Shacheng"]
+                let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                 let tags = [2,1,4,5,6]
                 var counter = 0
                 originStationButtons.forEach { (button) in
@@ -343,9 +367,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
                 
             case "Yanqing":
-                originFirstButton.setTitle("Yanqing", for: .normal)
+                originFirstButton.setTitle(NSLocalizedString("Yanqing", comment: ""), for: .normal)
                 originFirstButton.tag = 4
-                let stations = ["Nankou","Badaling","Huangtudian","Kangzhuang","Shacheng"]
+                let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                 let tags = [2,3,1,5,6]
                 var counter = 0
                 originStationButtons.forEach { (button) in
@@ -354,9 +378,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     counter += 1
                 }
             case "Kangzhuang":
-                originFirstButton.setTitle("Kangzhuang", for: .normal)
+                originFirstButton.setTitle(NSLocalizedString("Kangzhuang", comment: ""), for: .normal)
                 originFirstButton.tag = 5
-                let stations = ["Nankou","Badaling","Yanqing","Huangtudian","Shacheng"]
+                let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                 let tags = [2,3,4,1,6]
                 var counter = 0
                 originStationButtons.forEach { (button) in
@@ -365,9 +389,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     counter += 1
                 }
             case "Shacheng":
-                originFirstButton.setTitle("Shacheng", for: .normal)
+                originFirstButton.setTitle(NSLocalizedString("Shacheng", comment: ""), for: .normal)
                 originFirstButton.tag = 6
-                let stations = ["Nankou","Badaling","Yanqing","Kangzhuang","Huangtudian"]
+                let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Huangtudian", comment: "")]
                 let tags = [2,3,4,5,1]
                 var counter = 0
                 originStationButtons.forEach { (button) in
@@ -382,9 +406,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if type == "destination"{
                 switch station {
                 case "Huangtudian":
-                    destinationFirstButton.setTitle("Huangtudian", for: .normal)
+                    destinationFirstButton.setTitle(NSLocalizedString("Huangtudian", comment: ""), for: .normal)
                     destinationFirstButton.tag = 1
-                    let stations = ["Nankou","Badaling","Yanqing","Kangzhuang","Shacheng"]
+                    let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                     let tags = [2,3,4,5,6]
                     var counter = 0
                     destinationButtons.forEach { (button) in
@@ -393,9 +417,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         counter += 1
                     }
                 case "Nankou":
-                    destinationFirstButton.setTitle("Nankou", for: .normal)
+                    destinationFirstButton.setTitle(NSLocalizedString("Nankou", comment: ""), for: .normal)
                     destinationFirstButton.tag = 2
-                    let stations = ["Huangtudian","Badaling","Yanqing","Kangzhuang","Shacheng"]
+                    let stations = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                     let tags = [1,3,4,5,6]
                     var counter = 0
                     destinationButtons.forEach { (button) in
@@ -404,9 +428,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         counter += 1
                     }
                 case "Badaling":
-                    destinationFirstButton.setTitle("Badaling", for: .normal)
+                    destinationFirstButton.setTitle(NSLocalizedString("Badaling", comment: ""), for: .normal)
                     destinationFirstButton.tag = 3
-                    let stations = ["Nankou","Huangtudian","Yanqing","Kangzhuang","Shacheng"]
+                    let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                     let tags = [2,1,4,5,6]
                     var counter = 0
                     destinationButtons.forEach { (button) in
@@ -416,9 +440,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     }
                     
                 case "Yanqing":
-                    destinationFirstButton.setTitle("Yanqing", for: .normal)
+                    destinationFirstButton.setTitle(NSLocalizedString("Yanqing", comment: ""), for: .normal)
                     destinationFirstButton.tag = 4
-                    let stations = ["Nankou","Badaling","Huangtudian","Kangzhuang","Shacheng"]
+                    let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                     let tags = [2,3,1,5,6]
                     var counter = 0
                     destinationButtons.forEach { (button) in
@@ -427,9 +451,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         counter += 1
                     }
                 case "Kangzhuang":
-                    destinationFirstButton.setTitle("Kangzhuang", for: .normal)
+                    destinationFirstButton.setTitle(NSLocalizedString("Kangzhuang", comment: ""), for: .normal)
                     destinationFirstButton.tag = 5
-                    let stations = ["Nankou","Badaling","Yanqing","Huangtudian","Shacheng"]
+                    let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Shacheng", comment: "")]
                     let tags = [2,3,4,1,6]
                     var counter = 0
                     destinationButtons.forEach { (button) in
@@ -438,9 +462,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         counter += 1
                     }
                 case "Shacheng":
-                    destinationFirstButton.setTitle("Shacheng", for: .normal)
+                    destinationFirstButton.setTitle(NSLocalizedString("Shacheng", comment: ""), for: .normal)
                     destinationFirstButton.tag = 6
-                    let stations = ["Nankou","Badaling","Yanqing","Kangzhuang","Huangtudian"]
+                    let stations = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Huangtudian", comment: "")]
                     let tags = [2,3,4,5,1]
                     var counter = 0
                     destinationButtons.forEach { (button) in
@@ -459,95 +483,143 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBAction func stationTapped(_ sender: UIButton) { //OriginStationTapped
         switch sender.tag {
         case 1:
-            originFirstButton.tag = 1
-            originFirstButton.setTitle(NSLocalizedString("Huangtudian", comment: ""), for: .normal)
-            self.startStation = "Huangtudian"
-            let stationStringExcept1 = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
-            let tagExcept1 = [2,3,4,5,6]
-            var counter = 0
-            originStationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.destinationStation != "Huangtudian"{
+                originFirstButton.tag = 1
+                originFirstButton.setTitle(NSLocalizedString("Huangtudian", comment: ""), for: .normal)
+                self.startStation = "Huangtudian"
+                let stationStringExcept1 = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept1 = [2,3,4,5,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept1[counter], for: .normal)
+                    button.tag = tagExcept1[counter]
+                    counter += 1
+                }
+            }else{
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            originStationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept1[counter], for: .normal)
-                button.tag = tagExcept1[counter]
-                counter += 1
-            }
+            
         case 2:
-            originFirstButton.tag = 2
-            originFirstButton.setTitle(NSLocalizedString("Nankou", comment: ""), for: .normal)
-            self.startStation = "Nankou"
-            let stationStringExcept2 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
-            let tagExcept2 = [1,3,4,5,6]
-            var counter = 0
-            originStationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.destinationStation != "Nankou"{
+                originFirstButton.tag = 2
+                originFirstButton.setTitle(NSLocalizedString("Nankou", comment: ""), for: .normal)
+                self.startStation = "Nankou"
+                let stationStringExcept2 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept2 = [1,3,4,5,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept2[counter], for: .normal)
+                    button.tag = tagExcept2[counter]
+                    counter += 1
+                }
+            }else{
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            originStationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept2[counter], for: .normal)
-                button.tag = tagExcept2[counter]
-                counter += 1
-            }
+            
         case 3:
-            originFirstButton.tag = 3
-            originFirstButton.setTitle(NSLocalizedString("Badaling", comment: ""), for: .normal)
-            self.startStation = "Badaling"
-            let stationStringExcept3 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
-            let tagExcept3 = [1,2,4,5,6]
-            var counter = 0
-            originStationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.destinationStation != "Badaling"{
+                originFirstButton.tag = 3
+                originFirstButton.setTitle(NSLocalizedString("Badaling", comment: ""), for: .normal)
+                self.startStation = "Badaling"
+                let stationStringExcept3 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept3 = [1,2,4,5,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept3[counter], for: .normal)
+                    button.tag = tagExcept3[counter]
+                    counter += 1
+                }
+            }else{
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            originStationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept3[counter], for: .normal)
-                button.tag = tagExcept3[counter]
-                counter += 1
-            }
+            
         case 4:
-            originFirstButton.tag = 4
-            originFirstButton.setTitle(NSLocalizedString("Yanqing", comment: ""), for: .normal)
-            self.startStation = "Yanqing"
-            let stationStringExcept4 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
-            let tagExcept4 = [1,2,3,5,6]
-            var counter = 0
-            originStationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.destinationStation != "Yanqing"{
+                originFirstButton.tag = 4
+                originFirstButton.setTitle(NSLocalizedString("Yanqing", comment: ""), for: .normal)
+                self.startStation = "Yanqing"
+                let stationStringExcept4 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept4 = [1,2,3,5,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept4[counter], for: .normal)
+                    button.tag = tagExcept4[counter]
+                    counter += 1
+                }
+            }else{
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            originStationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept4[counter], for: .normal)
-                button.tag = tagExcept4[counter]
-                counter += 1
-            }
+            
         case 5:
-            originFirstButton.tag = 5
-            originFirstButton.setTitle(NSLocalizedString("Kangzhuang", comment: ""), for: .normal)
-            self.startStation = "Kangzhuang"
-            let stationStringExcept5 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Shacheng", comment: "")]
-            let tagExcept5 = [1,2,3,4,6]
-            var counter = 0
-            originStationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.destinationStation != "Kangzhuang"{
+                originFirstButton.tag = 5
+                originFirstButton.setTitle(NSLocalizedString("Kangzhuang", comment: ""), for: .normal)
+                self.startStation = "Kangzhuang"
+                let stationStringExcept5 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept5 = [1,2,3,4,6]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept5[counter], for: .normal)
+                    button.tag = tagExcept5[counter]
+                    counter += 1
+                }
+            }else{
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            originStationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept5[counter], for: .normal)
-                button.tag = tagExcept5[counter]
-                counter += 1
-            }
+            
         case 6:
-            originFirstButton.tag = 6
-            originFirstButton.setTitle(NSLocalizedString("Shacheng", comment: ""), for: .normal)
-            self.startStation = "Shacheng"
-            let stationStringExcept6 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: "")]
-            let tagExcept6 = [1,2,3,4,5]
-            var counter = 0
-            originStationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.destinationStation != "Shacheng"{
+                originFirstButton.tag = 6
+                originFirstButton.setTitle(NSLocalizedString("Shacheng", comment: ""), for: .normal)
+                self.startStation = "Shacheng"
+                let stationStringExcept6 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: "")]
+                let tagExcept6 = [1,2,3,4,5]
+                var counter = 0
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                originStationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept6[counter], for: .normal)
+                    button.tag = tagExcept6[counter]
+                    counter += 1
+                }
+            }else{
+                originStationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            originStationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept6[counter], for: .normal)
-                button.tag = tagExcept6[counter]
-                counter += 1
-            }
+            
         default:
             break
         }
@@ -585,95 +657,143 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBAction func destinationStationTapped(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            destinationFirstButton.tag = 1
-            destinationFirstButton.setTitle("Huangtudian", for: .normal)
-            self.destinationStation = "Huangtudian"
-            let stationStringExcept1 = ["Nankou","Badaling","Yanqing","Kangzhuang","Shacheng"]
-            let tagExcept1 = [2,3,4,5,6]
-            var counter = 0
-            destinationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.startStation != "Huangtudian"{
+                destinationFirstButton.tag = 1
+                destinationFirstButton.setTitle(NSLocalizedString("Huangtudian", comment: ""), for: .normal)
+                self.destinationStation = "Huangtudian"
+                let stationStringExcept1 = [NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept1 = [2,3,4,5,6]
+                var counter = 0
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                destinationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept1[counter], for: .normal)
+                    button.tag = tagExcept1[counter]
+                    counter += 1
+                }
+            }else{
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            destinationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept1[counter], for: .normal)
-                button.tag = tagExcept1[counter]
-                counter += 1
-            }
+            
         case 2:
-            destinationFirstButton.tag = 2
-            destinationFirstButton.setTitle("Nankou", for: .normal)
-            self.destinationStation = "Nankou"
-            let stationStringExcept2 = ["Huangtudian","Badaling","Yanqing","Kangzhuang","Shacheng"]
-            let tagExcept2 = [1,3,4,5,6]
-            var counter = 0
-            destinationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.startStation != "Nankou"{
+                destinationFirstButton.tag = 2
+                destinationFirstButton.setTitle(NSLocalizedString("Nankou", comment: ""), for: .normal)
+                self.destinationStation = "Nankou"
+                let stationStringExcept2 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept2 = [1,3,4,5,6]
+                var counter = 0
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                destinationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept2[counter], for: .normal)
+                    button.tag = tagExcept2[counter]
+                    counter += 1
+                }
+            }else{
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            destinationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept2[counter], for: .normal)
-                button.tag = tagExcept2[counter]
-                counter += 1
-            }
+            
         case 3:
-            destinationFirstButton.tag = 3
-            destinationFirstButton.setTitle("Badaling", for: .normal)
-            self.destinationStation = "Badaling"
-            let stationStringExcept3 = ["Huangtudian","Nankou","Yanqing","Kangzhuang","Shacheng"]
-            let tagExcept3 = [1,2,4,5,6]
-            var counter = 0
-            destinationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.startStation != "Badaling"{
+                destinationFirstButton.tag = 3
+                destinationFirstButton.setTitle(NSLocalizedString("Badaling", comment: ""), for: .normal)
+                self.destinationStation = "Badaling"
+                let stationStringExcept3 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept3 = [1,2,4,5,6]
+                var counter = 0
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                destinationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept3[counter], for: .normal)
+                    button.tag = tagExcept3[counter]
+                    counter += 1
+                }
+            }else{
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            destinationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept3[counter], for: .normal)
-                button.tag = tagExcept3[counter]
-                counter += 1
-            }
+            
         case 4:
-            destinationFirstButton.tag = 4
-            destinationFirstButton.setTitle("Yanqing", for: .normal)
-            self.destinationStation = "Yanqing"
-            let stationStringExcept4 = ["Huangtudian","Nankou","Badaling","Kangzhuang","Shacheng"]
-            let tagExcept4 = [1,2,3,5,6]
-            var counter = 0
-            destinationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.startStation != "Yanqing"{
+                destinationFirstButton.tag = 4
+                destinationFirstButton.setTitle(NSLocalizedString("Yanqing", comment: ""), for: .normal)
+                self.destinationStation = "Yanqing"
+                let stationStringExcept4 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Kangzhuang", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept4 = [1,2,3,5,6]
+                var counter = 0
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                destinationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept4[counter], for: .normal)
+                    button.tag = tagExcept4[counter]
+                    counter += 1
+                }
+            }else{
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            destinationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept4[counter], for: .normal)
-                button.tag = tagExcept4[counter]
-                counter += 1
-            }
+            
         case 5:
-            destinationFirstButton.tag = 5
-            destinationFirstButton.setTitle("Kangzhuang", for: .normal)
-            self.destinationStation = "Kangzhuang"
-            let stationStringExcept5 = ["Huangtudian","Nankou","Badaling","Yanqing","Shacheng"]
-            let tagExcept5 = [1,2,3,4,6]
-            var counter = 0
-            destinationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.startStation != "Kangzhuang"{
+                destinationFirstButton.tag = 5
+                destinationFirstButton.setTitle(NSLocalizedString("Kangzhuang", comment: ""), for: .normal)
+                self.destinationStation = "Kangzhuang"
+                let stationStringExcept5 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Shacheng", comment: "")]
+                let tagExcept5 = [1,2,3,4,6]
+                var counter = 0
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                destinationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept5[counter], for: .normal)
+                    button.tag = tagExcept5[counter]
+                    counter += 1
+                }
+            }else{
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            destinationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept5[counter], for: .normal)
-                button.tag = tagExcept5[counter]
-                counter += 1
-            }
+            
         case 6:
-            destinationFirstButton.tag = 6
-            destinationFirstButton.setTitle("Shacheng", for: .normal)
-            self.destinationStation = "Shacheng"
-            let stationStringExcept6 = ["Huangtudian","Nankou","Badaling","Yanqing","Kangzhuang"]
-            let tagExcept6 = [1,2,3,4,5]
-            var counter = 0
-            destinationButtons.forEach { (button) in
-                button.isHidden = true
+            if self.startStation != "Shacheng"{
+                destinationFirstButton.tag = 6
+                destinationFirstButton.setTitle(NSLocalizedString("Shacheng", comment: ""), for: .normal)
+                self.destinationStation = "Shacheng"
+                let stationStringExcept6 = [NSLocalizedString("Huangtudian", comment: ""),NSLocalizedString("Nankou", comment: ""),NSLocalizedString("Badaling", comment: ""),NSLocalizedString("Yanqing", comment: ""),NSLocalizedString("Kangzhuang", comment: "")]
+                let tagExcept6 = [1,2,3,4,5]
+                var counter = 0
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                destinationButtons.forEach { (button) in
+                    button.setTitle(stationStringExcept6[counter], for: .normal)
+                    button.tag = tagExcept6[counter]
+                    counter += 1
+                }
+            }else{
+                destinationButtons.forEach { (button) in
+                    button.isHidden = true
+                }
+                checkDuplicateStation()
             }
-            destinationButtons.forEach { (button) in
-                button.setTitle(stationStringExcept6[counter], for: .normal)
-                button.tag = tagExcept6[counter]
-                counter += 1
-            }
+            
         default:
             break
         }
@@ -685,7 +805,4 @@ class mapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     @IBOutlet var destinationButtons: [UIButton]!
-    
-    
-    
 }

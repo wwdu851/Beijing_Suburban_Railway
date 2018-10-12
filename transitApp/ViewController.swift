@@ -44,60 +44,58 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var displayTable = [Train_run]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return displayTable.count
+        if displayTable.isEmpty == true{
+            return 1
+        }else{
+            return displayTable.count
+        }
     }
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomCell
-        cell.backgroundColor = colorArray[(indexPath.row % 2)]
-        cell.startPlace.text = NSLocalizedString(self.startPlace, comment: "qidian")
-        cell.endPlace.text = NSLocalizedString(self.destinationPlace, comment: "zhongdian")
-        cell.priceLabel.text = ScheduleInit.calculatePrice(from: self.startPlace, to: self.destinationPlace)
-        var timeStart = "00:00"
-        var timeEnd = "00:00"
-        let stopsForRow = displayTable[indexPath.row].hasStops?.allObjects as! [Stop]
-        for eachStop in stopsForRow{
-            if eachStop.stopsAt!.stationName! == self.startPlace{
-                timeStart = "\(String(eachStop.hour)):\(timeLikeDigit(number: Int(eachStop.minute)))"
-            }else{
-                if eachStop.stopsAt!.stationName! == self.destinationPlace{
-                    timeEnd = "\(String(eachStop.hour)):\(timeLikeDigit(number: Int(eachStop.minute)))"
+        if displayTable.isEmpty == false{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomCell
+            cell.backgroundColor = colorArray[(indexPath.row % 2)]
+            cell.startPlace.text = NSLocalizedString(self.startPlace, comment: "qidian")
+            cell.endPlace.text = NSLocalizedString(self.destinationPlace, comment: "zhongdian")
+            cell.priceLabel.text = ScheduleInit.calculatePrice(from: self.startPlace, to: self.destinationPlace)
+            var timeStart = "00:00"
+            var timeEnd = "00:00"
+            let stopsForRow = displayTable[indexPath.row].hasStops?.allObjects as! [Stop]
+            for eachStop in stopsForRow{
+                if eachStop.stopsAt!.stationName! == self.startPlace{
+                    timeStart = "\(String(eachStop.hour)):\(timeLikeDigit(number: Int(eachStop.minute)))"
+                }else{
+                    if eachStop.stopsAt!.stationName! == self.destinationPlace{
+                        timeEnd = "\(String(eachStop.hour)):\(timeLikeDigit(number: Int(eachStop.minute)))"
+                    }
                 }
             }
-        }
-        cell.startTime.text = timeStart
-        cell.endTime.text = timeEnd
+            cell.startTime.text = timeStart
+            cell.endTime.text = timeEnd
 
-        return cell
+            return cell
+        }else{
+            let emptyCell = tableView.dequeueReusableCell(withIdentifier: "NoResultCell", for: indexPath)
+             return emptyCell
+        }
+    
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
-    let initialLoc = CLLocation(latitude: 40.070324, longitude: 116.362532)
-    let regionRadius:CLLocationDistance = 1000
-    let huangtudianStationCoodrinate = CLLocationCoordinate2D(latitude: 116.369918, longitude: 40.076255)
-    let nankouStationCoordinate = CLLocationCoordinate2D(latitude: 116.135548, longitude: 40.24564)
-    let badalingStationCoordinate = CLLocationCoordinate2D(latitude: 116.008134, longitude: 40.365971)
-    let yanqingStationCoordinate = CLLocationCoordinate2D(latitude: 115.990909, longitude: 40.441915)
-    let shachengStationCoordinate = CLLocationCoordinate2D(latitude: 115.522519, longitude: 40.403056)
-    
-    
-    let locationManager = CLLocationManager()
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.separatorStyle = .none
-        self.navigationItem.title = NSLocalizedString("Schedule", comment: "shikebiao")
+        self.navigationItem.title = NSLocalizedString("Schedule", comment: "Train Schedule")
         todayButtonDark()
-        
+
         displayTable = ScheduleInit.allTrainAfterTime(hour: 0, minute: 0, onLine: "S2", weekDay: isWeekday(), atStation: startPlace, direction: trainDirection, headTo: destinationPlace)
+        print(displayTable.isEmpty)
     }
     
     func refreshTrainData(day:Int){

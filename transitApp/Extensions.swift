@@ -21,3 +21,9 @@ extension UIView {
     }
 }
 
+extension UserDefaults{
+    func checkLoadedSchedule(){
+        
+    }
+}
+
