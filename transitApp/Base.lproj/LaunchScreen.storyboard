@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4VA-nq-vem">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -82,6 +82,7 @@
         <!--Item-->
         <scene sceneID="P4p-0x-xSW">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uPw-qa-vmL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4VA-nq-vem" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="KS0-HG-2sG"/>
                     <toolbarItems/>
@@ -95,7 +96,6 @@
                         <segue destination="01J-lp-oVM" kind="relationship" relationship="rootViewController" id="Mjp-CZ-mOt"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uPw-qa-vmL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="991.20000000000005" y="374.66266866566718"/>
         </scene>

@@ -20,7 +20,6 @@
 		3D38F38F1F26E44A00E05B75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D38F38D1F26E44A00E05B75 /* LaunchScreen.storyboard */; };
 		3D38F39A1F26E44A00E05B75 /* transitAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D38F3991F26E44A00E05B75 /* transitAppTests.swift */; };
 		3D38F3A51F26E44A00E05B75 /* transitAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D38F3A41F26E44A00E05B75 /* transitAppUITests.swift */; };
-		3D4A02FF203B680200E90D0D /* StationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4A02FE203B680200E90D0D /* StationInfoViewController.swift */; };
 		3D4CECB620C9B191000A845F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CECB520C9B191000A845F /* Extensions.swift */; };
 		3D4CECBD20C9B6E9000A845F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4CECBC20C9B6E9000A845F /* NotificationCenter.framework */; };
 		3D4CECC020C9B6EA000A845F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CECBF20C9B6EA000A845F /* TodayViewController.swift */; };
@@ -32,6 +31,8 @@
 		3D72BD1E1F270CF800D7039D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D72BD1D1F270CF800D7039D /* MapKit.framework */; };
 		3DA3093B205627550066C936 /* ScheduleInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA3093A205627550066C936 /* ScheduleInit.swift */; };
 		3DA3093D205636AB0066C936 /* mapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA3093C205636AB0066C936 /* mapViewController.swift */; };
+		3DB617062171935700EB8937 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB617052171935700EB8937 /* SettingsTableViewController.swift */; };
+		3DB6170B2171B74400EB8937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB6170D2171B74400EB8937 /* InfoPlist.strings */; };
 		3DC4EEF4216DC18900AEAC42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC4EEF6216DC18900AEAC42 /* Localizable.strings */; };
 		3DD9583B1F321F0B0012D620 /* train.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD9583A1F321F0B0012D620 /* train.swift */; };
 		3DE51CD520C65C4F002E6DFE /* CustomAnnotationCalloutXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DE51CD420C65C4F002E6DFE /* CustomAnnotationCalloutXib.xib */; };
@@ -97,7 +98,6 @@
 		3D38F3A01F26E44A00E05B75 /* transitAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = transitAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D38F3A41F26E44A00E05B75 /* transitAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transitAppUITests.swift; sourceTree = "<group>"; };
 		3D38F3A61F26E44A00E05B75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3D4A02FE203B680200E90D0D /* StationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInfoViewController.swift; sourceTree = "<group>"; };
 		3D4CECB520C9B191000A845F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3D4CECBB20C9B6E9000A845F /* transitApp_widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = transitApp_widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4CECBC20C9B6E9000A845F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -110,6 +110,9 @@
 		3D72BD1D1F270CF800D7039D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3DA3093A205627550066C936 /* ScheduleInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInit.swift; sourceTree = "<group>"; };
 		3DA3093C205636AB0066C936 /* mapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapViewController.swift; sourceTree = "<group>"; };
+		3DB617052171935700EB8937 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		3DB6170C2171B74400EB8937 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3DB6170E2171B78F00EB8937 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DC4EEEF216DC13300AEAC42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		3DC4EEF0216DC13400AEAC42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		3DC4EEF1216DC13400AEAC42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainInterface.strings"; sourceTree = "<group>"; };
@@ -193,7 +196,6 @@
 				3DD9583A1F321F0B0012D620 /* train.swift */,
 				3D050CD71F3461280077340B /* DetailTableViewController.swift */,
 				3D7020671F3475F6004B308D /* DetailCell.swift */,
-				3D4A02FE203B680200E90D0D /* StationInfoViewController.swift */,
 				3DA3093A205627550066C936 /* ScheduleInit.swift */,
 				3DA3093C205636AB0066C936 /* mapViewController.swift */,
 				3DE51CD420C65C4F002E6DFE /* CustomAnnotationCalloutXib.xib */,
@@ -204,6 +206,8 @@
 				3D04B9E620D8BC220062C69D /* BottomDetailViewController.swift */,
 				3D04B9E720D8BC220062C69D /* BottomDetailViewController.xib */,
 				3DC4EEF6216DC18900AEAC42 /* Localizable.strings */,
+				3DB617052171935700EB8937 /* SettingsTableViewController.swift */,
+				3DB6170D2171B74400EB8937 /* InfoPlist.strings */,
 			);
 			path = transitApp;
 			sourceTree = "<group>";
@@ -383,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D04B9E920D8BC220062C69D /* BottomDetailViewController.xib in Resources */,
+				3DB6170B2171B74400EB8937 /* InfoPlist.strings in Resources */,
 				3DC4EEF4216DC18900AEAC42 /* Localizable.strings in Resources */,
 				3DE51CD520C65C4F002E6DFE /* CustomAnnotationCalloutXib.xib in Resources */,
 				3D38F38F1F26E44A00E05B75 /* LaunchScreen.storyboard in Resources */,
@@ -426,12 +431,12 @@
 				3DA3093B205627550066C936 /* ScheduleInit.swift in Sources */,
 				3D04B9E820D8BC220062C69D /* BottomDetailViewController.swift in Sources */,
 				3D7020681F3475F6004B308D /* DetailCell.swift in Sources */,
+				3DB617062171935700EB8937 /* SettingsTableViewController.swift in Sources */,
 				3D52CC9E1F2B234800591583 /* CustomCell.swift in Sources */,
 				3D050CD81F3461280077340B /* DetailTableViewController.swift in Sources */,
 				3D38F3841F26E44A00E05B75 /* ViewController.swift in Sources */,
 				3D28264E216F981900F35F82 /* EmptyCell.swift in Sources */,
 				3DA3093D205636AB0066C936 /* mapViewController.swift in Sources */,
-				3D4A02FF203B680200E90D0D /* StationInfoViewController.swift in Sources */,
 				3DD9583B1F321F0B0012D620 /* train.swift in Sources */,
 				3D38F3821F26E44A00E05B75 /* AppDelegate.swift in Sources */,
 				3DE51D5520C7B9D2002E6DFE /* CDTestViewController.swift in Sources */,
@@ -510,6 +515,15 @@
 				3DC4EEF1216DC13400AEAC42 /* zh-Hans */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		3DB6170D2171B74400EB8937 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3DB6170C2171B74400EB8937 /* zh-Hans */,
+				3DB6170E2171B78F00EB8937 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		3DC4EEF6216DC18900AEAC42 /* Localizable.strings */ = {

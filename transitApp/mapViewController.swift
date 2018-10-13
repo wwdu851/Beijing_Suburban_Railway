@@ -17,9 +17,10 @@ protocol mapViewControllerDelegate:class {
 
 class mapViewController: UIViewController, MKMapViewDelegate, CustomCalloutViewDelegate {
     // CLLocationManagerDelegate
+    
     func informationButtonTapped(_ calloutView: CustomCalloutView) {
-        print("Information Tapped")
-        
+        currentStationSelectedForInformation = calloutView.stationName
+        self.performSegue(withIdentifier: "showStationDetail", sender: nil)
     }
     
 //    let locationManager = CLLocationManager()
@@ -30,14 +31,14 @@ class mapViewController: UIViewController, MKMapViewDelegate, CustomCalloutViewD
     var currentClicked = ""
     var currentTitle = "Destination"
     var selectedFromMap = false
-    var selectedOrigin = false
-    var selectedDestination = false
+
+    var currentStationSelectedForInformation = ""
+    
     
     
     @IBOutlet weak var mapView: MKMapView!
     
     @IBAction func currentButtonAction(_ sender: UIButton) {
-        
     }
     
     
@@ -124,11 +125,6 @@ class mapViewController: UIViewController, MKMapViewDelegate, CustomCalloutViewD
             ScheduleInit.trainInit()
             userDefaults.set("2018OCT08", forKey: "version")
         }
-
-        
-        // Core Data Test
-//        ScheduleInit.trainInfoWithNumber(trainNumber: 203, from: "Huangtudian", to: "Badaling")
-        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -137,16 +133,6 @@ class mapViewController: UIViewController, MKMapViewDelegate, CustomCalloutViewD
         let s2_pinImage = #imageLiteral(resourceName: "s2_station")
         
         
-        //resize image
-/*
-        let size = CGSize(width: 20, height: 20)
-        UIGraphicsBeginImageContext(size)
-        
-        pinImage.draw(in: CGRect(origin: .zero, size: size))
-        let resizedimage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        */
         let s2_resizedImage = UIImage(cgImage: s2_pinImage.cgImage!, scale: s2_pinImage.size.width / 5, orientation: .up)
         let transfer_resizedImage = UIImage(cgImage: transfer_pinImage.cgImage!, scale: transfer_pinImage.size.width / 5, orientation: .up)
         pin.canShowCallout = true
@@ -209,13 +195,6 @@ class mapViewController: UIViewController, MKMapViewDelegate, CustomCalloutViewD
         guard let calloutView = view.detailCalloutAccessoryView as? CustomCalloutView else{
             return
         }
-//        if selectedDestination == false {
-//            calloutView.directionButtonOutlet.setTitle(NSLocalizedString("Destination", comment: "zhongdianzhan"), for: .normal)
-//            selectedDestination = true
-//        } else {
-//            calloutView.directionButtonOutlet.setTitle(NSLocalizedString("From", comment: "cong"), for: .normal)
-//            selectedDestination = false
-//        }
         calloutView.directionButtonOutlet.setTitle(NSLocalizedString(currentTitle, comment: ""), for: .normal)
     }
 
@@ -291,6 +270,19 @@ class mapViewController: UIViewController, MKMapViewDelegate, CustomCalloutViewD
             self.destinationStation = "Yanqing"
             self.currentTitle = "Destination"
             self.selectedFromMap = false
+        }
+        
+        if segue.identifier == "showStationDetail"{
+            let destVC = segue.destination as! StationInformationViewController
+            destVC.currentStation = self.currentStationSelectedForInformation
+            for index in 0...self.s2StationArray.count{
+                if s2StationArray[index] == currentStationSelectedForInformation{
+                    destVC.stationLatitude = s2StationCoordinates[index].0
+                    destVC.stationLongitude = s2StationCoordinates[index].1
+                    break
+                }
+            }
+            
         }
      }
     

@@ -145,65 +145,65 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     
     @IBAction func weeday_button_1(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        sender.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         let weekDayOutlet = [weekday_outlet_2,weekday_outlet_3,weekday_outlet_4,weekday_outlet_5,weekday_outlet_6,weekday_outlet_7]
         for each in weekDayOutlet{
-            each?.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
+            each?.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
         refreshTrainData(day: 1)
     }
     
     @IBAction func weekday_button_2(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        sender.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         let weekDayOutlet = [weekday_outlet_1,weekday_outlet_3,weekday_outlet_4,weekday_outlet_5,weekday_outlet_6,weekday_outlet_7]
         for each in weekDayOutlet{
-            each?.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
+            each?.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
         refreshTrainData(day: 2)
 
     }
     
     @IBAction func weekday_button_3(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        sender.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         let weekDayOutlet = [weekday_outlet_1,weekday_outlet_2,weekday_outlet_4,weekday_outlet_5,weekday_outlet_6,weekday_outlet_7]
         for each in weekDayOutlet{
-            each?.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
+            each?.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
         refreshTrainData(day: 3)
     }
     
     @IBAction func weekday_button_4(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        sender.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         let weekDayOutlet = [weekday_outlet_1,weekday_outlet_2,weekday_outlet_3,weekday_outlet_5,weekday_outlet_6,weekday_outlet_7]
         for each in weekDayOutlet{
-            each?.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
+            each?.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
         refreshTrainData(day: 4)
     }
     
     @IBAction func weekday_buton_5(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        sender.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         let weekDayOutlet = [weekday_outlet_1,weekday_outlet_2,weekday_outlet_3,weekday_outlet_4,weekday_outlet_6,weekday_outlet_7]
         for each in weekDayOutlet{
-            each?.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
+            each?.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
         refreshTrainData(day: 5)
     }
     
     @IBAction func weekday_button_6(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        sender.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         let weekDayOutlet = [weekday_outlet_1,weekday_outlet_3,weekday_outlet_4,weekday_outlet_5,weekday_outlet_2,weekday_outlet_7]
         for each in weekDayOutlet{
-            each?.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
+            each?.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
         refreshTrainData(day: 6)
     }
     
     @IBAction func weekday_buton_7(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        sender.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         let weekDayOutlet = [weekday_outlet_1,weekday_outlet_3,weekday_outlet_4,weekday_outlet_5,weekday_outlet_6,weekday_outlet_2]
         for each in weekDayOutlet{
-            each?.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
+            each?.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
         refreshTrainData(day: 7)
     }
@@ -213,19 +213,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let date = Date()
         let calendar = Calendar(identifier: .gregorian)
         let component = calendar.component(.weekday, from: date)
+        print("today is \(component)")
         switch component {
         case 1:
-            weekday_outlet_1.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            weekday_outlet_1.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         case 2:
-            weekday_outlet_2.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            weekday_outlet_2.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         case 3:
-            weekday_outlet_3.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            weekday_outlet_3.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         case 4:
-            weekday_outlet_4.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            weekday_outlet_4.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         case 5:
-            weekday_outlet_5.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            weekday_outlet_5.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         case 6:
-            weekday_outlet_6.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            weekday_outlet_6.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
+        case 7:
+            weekday_outlet_7.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         default:
             break
         }
