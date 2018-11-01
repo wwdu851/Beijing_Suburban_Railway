@@ -1,4 +1,5 @@
 # Beijing Suburban Railway
+# 北京市郊铁路
 
 [简体中文](https://github.com/stringconstant/Beijing_Suburban_Railway/blob/master/README_zh_CN.md)
 
@@ -8,7 +9,7 @@ Anyone wishes to work on localization is welcomed!
 
 # Come here and try it out!
 
-Chinese App Store Preview Page:
+中国区App Store下载地址:
 
 [![Download on App Store](https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg)](https://itunes.apple.com/cn/app/北京市郊铁路/id1438805050?l=zh&ls=1&mt=8)
 
