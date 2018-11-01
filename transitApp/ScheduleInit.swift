@@ -13,10 +13,6 @@ import CoreData
 
 struct ScheduleInit {
     
-    func coreDataInit(){
-        
-    }
-    
     
     let s1stationArray = ["Beijing West","Beijing","Beijing East","Tongzhou"]
     let s2stationArray = ["Huangtudian","Nankou","Badaling","Yanqing","Kangzhuang","Shacheng"]
@@ -27,8 +23,6 @@ struct ScheduleInit {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
         let context = appDelegate.persistentContainer.viewContext
-        //let newTrain = NSEntityDescription.insertNewObject(forEntityName: "Schedule", into: context)
-        
         
         // Insert Train Stations
         
@@ -59,7 +53,7 @@ struct ScheduleInit {
         kangzhuang_station.nextStation = shacheng_station
         shacheng_station.prevStation = kangzhuang_station
         
-        
+    
         let line_s2 = Train_line(context: context)
         line_s2.lineName = "S2"
         line_s2.addToHasStations([huangtudian_station,nankou_station,badaling_station,yanqing_station,kangzhuang_station,shacheng_station])
@@ -93,8 +87,6 @@ struct ScheduleInit {
         let train_226 = Train_run(context: context)
         let train_230 = Train_run(context: context)
         let train_288 = Train_run(context: context)
-        
-        
         
 
         // Northbound train Information Setting

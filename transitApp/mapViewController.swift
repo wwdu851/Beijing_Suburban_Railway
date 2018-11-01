@@ -90,21 +90,11 @@ class mapViewController: UIViewController, MKMapViewDelegate, CustomCalloutViewD
         
         
         mapView.delegate = self
-//        locationManager.delegate = self
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.requestAlwaysAuthorization()
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-//        guard let newCoordinates = locationManager.location?.coordinate else {
-//            return
-//        }
         
         centerCoordinate = CLLocationCoordinate2D(latitude: 40.225323, longitude: 116.147442)
         let region = MKCoordinateRegion.init(center: CLLocationCoordinate2D(latitude: 40.225323, longitude: 116.147442), latitudinalMeters: 150000, longitudinalMeters: 150000)
-            //MKCoordinateRegion.init(center: centerCoordinate, latitudinalMeters: 150000, longitudinalMeters: 150000)
         mapView.setRegion(region, animated: true)
         
-//        coordinate = newCoordinates
         
         let s2StationAnnotationArray = [huangtudianStationAnnotation,nankouStationAnnotation,badalingStationAnnotation,yanqingStationAnnotation,kangzhuangStationAnnotation,shachengStationAnnotation]
         
