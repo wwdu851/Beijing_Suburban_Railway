@@ -1,5 +1,4 @@
-# Beijing Suburban Railway
-# 北京市郊铁路
+# Beijing Suburban Railway 北京市郊铁路
 
 [简体中文](https://github.com/stringconstant/Beijing_Suburban_Railway/blob/master/README_zh_CN.md)
 
