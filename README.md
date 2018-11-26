@@ -6,7 +6,7 @@ A train schedule app for Beijing Suburban Railway Line S2, connecting three dist
 
 Anyone wishes to work on localization is welcomed!
 
-# Come here and try it out!
+## Download
 
 中国区App Store下载地址:
 
