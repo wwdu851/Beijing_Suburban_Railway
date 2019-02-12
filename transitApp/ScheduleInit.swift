@@ -739,29 +739,13 @@ struct ScheduleInit {
     static func saveNewStation(station:String,inLine:Int){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
+        
         let stationToSafe = Train_station(context: context)
         stationToSafe.stationName = station
         do{
             try context.save()
         }catch{
             print("Error occured when saving\(station)")
-        }
-    }
-    
-    
-    static func trainFetch(){
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.persistentContainer.viewContext
-        
-        let fetch = NSFetchRequest<Train_run>(entityName: "Train_run")
-        fetch.returnsObjectsAsFaults = false
-            let result = try!
-                context.fetch(fetch)
-        for d in result {
-            let newTempStops = d.hasStops as! Set<Stop>
-            for s in newTempStops{
-                print("The train stops at \(s.stopsAt!.stationName!) station at \(s.hour):\(s.minute)")
-            }
         }
     }
     
@@ -791,39 +775,20 @@ struct ScheduleInit {
         do{
             result = try context.fetch(fetchRequest)
             for eachTrain in result{
-                if trainDirection(train: eachTrain) == direction{
-                    if eachTrain.inLine?.lineName == onLine{
-                        switch weekDay{
-                        case true:
-                            if eachTrain.weekdayService == true{
-                                let stopSet = eachTrain.hasStops!
-                                for eachStop in stopSet{
-                                    let stop = eachStop as! Stop
-                                    if stop.stopsAt!.stationName! == atStation{
-                                        if stop.hour < hour{
-                                            filteredResult.append(eachTrain)
-                                        }else{
-                                            if stop.hour == hour && stop.minute < minute{
-                                                
-                                                filteredResult.append(eachTrain)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        case false:
-                            let stopSet = eachTrain.hasStops!
-                            for eachStop in stopSet{
-                                let stop = eachStop as! Stop
-                                if stop.stopsAt!.stationName! == atStation{
-                                    if stop.hour < hour{
+                if (trainDirection(train: eachTrain) == direction) && (eachTrain.inLine?.lineName == onLine){
+                    let stopSet = eachTrain.hasStops!
+                    for eachStop in stopSet{
+                        let stop = eachStop as! Stop
+                        if stop.stopsAt!.stationName! == atStation{
+                            if stop.hour < hour || stop.hour == hour && stop.minute < minute{
+                                if weekDay == true{
+                                    if eachTrain.weekdayService == true{
                                         filteredResult.append(eachTrain)
-                                    }else{
-                                        if stop.hour == hour && stop.minute < minute{
-                                            filteredResult.append(eachTrain)
-                                        }
                                     }
+                                }else{
+                                    filteredResult.append(eachTrain)
                                 }
+                                            
                             }
                         }
                     }
@@ -833,7 +798,7 @@ struct ScheduleInit {
             print("Failed to fetch train data for 'AllTrainBeforeTime' function")
         }
         
-        filteredResult = filteredResult.sorted(by:{$0.trainNumber < $1.trainNumber})
+        filteredResult = filteredResult.sorted(by:{convertTime(station: atStation, trainRun: $0) <= convertTime(station: atStation, trainRun: $1)})
         for each in filteredResult{
             let stopList = each.hasStops!.allObjects as! [Stop]
             for eachStop in stopList{
@@ -859,38 +824,18 @@ struct ScheduleInit {
         do{
             result = try context.fetch(fetchRequest)
             for eachTrain in result{
-                if trainDirection(train: eachTrain) == direction{
-                    if eachTrain.inLine?.lineName == onLine{
-                        switch weekDay{
-                        case true:
-                            if eachTrain.weekdayService == true{
-                                let stopSet = eachTrain.hasStops!
-                                for eachStop in stopSet{
-                                    let stop = eachStop as! Stop
-                                    if stop.stopsAt!.stationName! == atStation{
-                                        if stop.hour > hour{
-                                            filteredResult.append(eachTrain)
-                                        }else{
-                                            if stop.hour == hour && stop.minute >= minute{
-
-                                                filteredResult.append(eachTrain)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        case false:
-                            let stopSet = eachTrain.hasStops!
-                            for eachStop in stopSet{
-                                let stop = eachStop as! Stop
-                                if stop.stopsAt!.stationName! == atStation{
-                                    if stop.hour > hour{
+                if trainDirection(train: eachTrain) == direction && eachTrain.inLine?.lineName == onLine{
+                    let stopSet = eachTrain.hasStops!
+                    for eachStop in stopSet{
+                        let stop = eachStop as! Stop
+                        if stop.stopsAt!.stationName! == atStation{
+                            if (stop.hour > hour) || (stop.hour == hour && stop.minute >= minute){
+                                if weekDay == true{
+                                    if eachTrain.weekdayService == true{
                                         filteredResult.append(eachTrain)
-                                    }else{
-                                        if stop.hour == hour && stop.minute >= minute{
-                                            filteredResult.append(eachTrain)
-                                        }
                                     }
+                                }else{
+                                    filteredResult.append(eachTrain)
                                 }
                             }
                         }
@@ -901,7 +846,7 @@ struct ScheduleInit {
             print("Failed to fetch train data for 'AllTrainBeforeTime' function")
         }
         
-        filteredResult = filteredResult.sorted(by:{stopTimeOf(station: atStation, trainRun: $0) <= stopTimeOf(station: atStation, trainRun: $1)})
+        filteredResult = filteredResult.sorted(by:{convertTime(station: atStation, trainRun: $0) <= convertTime(station: atStation, trainRun: $1)})
         for each in filteredResult{
             let stopList = each.hasStops!.allObjects as! [Stop]
             for eachStop in stopList{
@@ -937,7 +882,7 @@ struct ScheduleInit {
         return returnSet
     }
     
-    static func stopTimeOf(station:String,trainRun:Train_run) -> Int{
+    static func convertTime(station:String,trainRun:Train_run) -> Int{
         let stopsForRun = trainRun.hasStops?.allObjects as! [Stop]
         var time = 0
         for eachStop in stopsForRun{
@@ -982,15 +927,11 @@ struct ScheduleInit {
                 break
             }
         }
-        
-        if to == "Shacheng" && from != "Shacheng"{
+        // Price calculation for travelling outside Beijing city border
+        if to == "Shacheng" || from == "Shacheng"{
             price += 10
         }
-        
-        if to != "Shacheng" && from == "Shacheng"{
-            price += 10
-        }
-        
+
         returnString = "¥\(price)"
         
         return returnString
