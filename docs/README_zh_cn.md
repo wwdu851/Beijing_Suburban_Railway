@@ -10,7 +10,7 @@
 
 ## 隐私政策
 
-[隐私政策](/docs/privacy_zh_CN.md)
+[隐私政策](/docs/privacy_zh_cn.md)
 
 ## 下载
 
