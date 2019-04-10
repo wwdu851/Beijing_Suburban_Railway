@@ -8,7 +8,11 @@
 
 欢迎大家来翻译本应用以便让更多的人使用！
 
-App Store 下载地址：
+## 隐私政策
+
+[隐私政策](/docs/privacy_zh_cn.md)
+
+## 下载
 
 [![Download on App Store](https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg)](https://itunes.apple.com/cn/app/北京市郊铁路/id1438805050?l=zh&ls=1&mt=8)
 
