@@ -50,7 +50,7 @@ class StationInformationViewController: UIViewController,MKMapViewDelegate {
     @IBAction func callButtonAction(_ sender: UIButton) {
         if phoneNumber(forStation: currentStation) == "NULL"{
             let alertController = UIAlertController(title: NSLocalizedString("Sorry!", comment: "抱歉"), message: NSLocalizedString("Currently we don't have the phone number for ", comment: "") + NSLocalizedString(currentStation, comment:"") + NSLocalizedString(" Station. We will update frequently to update the information", comment: ""), preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            let alertAction = UIAlertAction(title: NSLocalizedString("Okay", comment: ""), style: .default, handler: nil)
             alertController.addAction(alertAction)
             self.present(alertController, animated: true, completion: nil)
         }else{
