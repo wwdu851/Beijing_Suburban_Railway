@@ -1,4 +1,4 @@
-# Beijing Suburban Railway 北京市郊铁路
+# Beijing Suburban Railway
 
 [简体中文](/docs/README_zh_CN.md)
 
@@ -6,15 +6,10 @@ A train schedule app for Beijing Suburban Railway Line S2, connecting three dist
 
 Anyone wishes to work on localization is welcomed!
 
+## Privacy
+
+[Privacy Policy](/docs/privacy.md)
+
 ## Download
 
-中国区App Store下载地址:
-
-[![Download on App Store](https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg)](https://itunes.apple.com/cn/app/北京市郊铁路/id1438805050?l=zh&ls=1&mt=8)
-
-English App Store Preview Page:
-
 [![Download on App Store](https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg)](https://itunes.apple.com/us/app/北京市郊铁路/id1438805050?l=zh&ls=1&mt=8)
-
-
-
