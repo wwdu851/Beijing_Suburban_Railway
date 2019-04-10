@@ -1,6 +1,6 @@
 # Privacy Policy #
 
-[简体中文](/docs/privacy_zh_cn.md)
+[简体中文](privacy_zh_cn.md)
 
 The creator of this app, Weiran Du, or stringconstant on GitHub, genuinely advocates the privacy for users in this digital age. Therefore, neither stringconstant nor Beijing Suburban Railway collects any personal data from the app's users. 
 
