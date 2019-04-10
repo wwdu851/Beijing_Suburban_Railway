@@ -111,9 +111,9 @@ class mapViewController: UIViewController, MKMapViewDelegate, CustomCalloutViewD
         let userDefaults = UserDefaults.standard
         
         let currentVersion = userDefaults.string(forKey: "version") ?? "NOT_LOADED"
-        if currentVersion == "NOT_LOADED"{
+        if currentVersion != "20190410" {
             ScheduleInit.trainInit()
-            userDefaults.set("2018OCT08", forKey: "version")
+            userDefaults.set("20190410", forKey: "version")
         }
     }
     

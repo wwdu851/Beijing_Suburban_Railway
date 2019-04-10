@@ -10,14 +10,14 @@
 "Badaling" = "八达岭";
 "From" = "设为起点";
 "Destination" = "设为终点";
-"Information" = "站点信息";
+"Information" = "车站信息";
 "Nankou" = "南口";
 "Kangzhuang" = "康庄";
 "Huangtudian" = "黄土店";
 "Line S2" = "S2线";
 "Shacheng" = "沙城";
 "System Map" = "线路图";
-"BSR System Map" = "北京市郊铁路线路图";
+"BSR System Map" = "线路图";
 "Schedule" = "时刻表";
 "Opps!" = "噢！";
 "You've selected duplicated station. Want to start over?" = "您选择了重复的车站，请重新选择。";
@@ -39,7 +39,7 @@
 
 "Badaling station is the cloeset station to Badaling Great Wall. Visitors can get off here and take the free shuttle to the Great Wall." = "八达岭站位于八达岭长城脚下。乘客可由此乘坐免费接驳车前往八达岭长城";
 
-"Yanqing station has multiple buses connect to Yanqing District Center in a few minutes. Buses also head to several scenic areas from this station." = "延庆站离延庆城区仅数分钟车程。乘客可在此换乘公交车前往延庆城区，龙庆峡，和古崖居。";
+"Yanqing station has multiple buses connect to Yanqing District Center in a few minutes. Buses also head to several scenic areas from this station." = "延庆站离延庆城区仅数分钟车程。乘客可在此换乘公交车前往延庆城区、龙庆峡和古崖居。";
 
 "Kangzhuang station is located at the town of Kangzhuang, which is close to the city border of Beijing." = "康庄站位于北京市的西北部，距离官厅水库较近。";
 

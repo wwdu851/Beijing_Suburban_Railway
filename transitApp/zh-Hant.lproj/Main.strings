@@ -1,0 +1,165 @@
+
+/* Class = "UIButton"; normalTitle = "Yanqing"; ObjectID = "1g5-hn-GZr"; */
+"1g5-hn-GZr.normalTitle" = "延慶";
+
+/* Class = "UILabel"; text = "Origin"; ObjectID = "2cY-mo-LjG"; */
+"2cY-mo-LjG.text" = "始發站";
+
+/* Class = "UIButton"; normalTitle = "Nankou"; ObjectID = "41t-PD-MZV"; */
+"41t-PD-MZV.normalTitle" = "南口";
+
+/* Class = "UITableViewSection"; footerTitle = "The Beijing Suburban Railway App is not affiliated with Beijing Municipal Commission of Transportation and Ministry of Railways in China. The train schedule should be used only for referencing purposes."; ObjectID = "50x-fZ-d8J"; */
+"50x-fZ-d8J.footerTitle" = "北京市郊鐵路應用程式及其作者與北京市交通局和中國鐵道部無關。時間表及列車信息僅供參考使用。";
+
+/* Class = "UITableViewSection"; headerTitle = "About Author"; ObjectID = "50x-fZ-d8J"; */
+"50x-fZ-d8J.headerTitle" = "關於作者";
+
+/* Class = "UILabel"; text = "Huangtudian"; ObjectID = "55Q-bK-rrr"; */
+"55Q-bK-rrr.text" = "黃土店";
+
+/* Class = "UIButton"; normalTitle = "Kangzhuang"; ObjectID = "5RU-wF-nHG"; */
+"5RU-wF-nHG.normalTitle" = "康莊";
+
+/* Class = "UIButton"; normalTitle = "Wed"; ObjectID = "5Sl-TI-dof"; */
+"5Sl-TI-dof.normalTitle" = "三";
+
+/* Class = "UIButton"; normalTitle = "Shacheng"; ObjectID = "7kl-cE-vdC"; */
+"7kl-cE-vdC.normalTitle" = "沙城";
+
+/* Class = "UITabBarItem"; title = "System Map"; ObjectID = "89H-VF-vAL"; */
+"89H-VF-vAL.title" = "路網圖";
+
+/* Class = "UINavigationItem"; title = "System Map"; ObjectID = "8MO-3B-3Dc"; */
+"8MO-3B-3Dc.title" = "路網圖";
+
+/* Class = "UILabel"; text = "Destination"; ObjectID = "8YO-2q-eMU"; */
+"8YO-2q-eMU.text" = "終點站";
+
+/* Class = "UILabel"; text = "Each weekday has a different schedule. Please select the weekday of your ride."; ObjectID = "BKw-SV-3qF"; */
+"BKw-SV-3qF.text" = "每一天的列車時間表是不同的。請選擇乘車日期。";
+
+/* Class = "UILabel"; text = "¥8"; ObjectID = "Eno-jd-UQc"; */
+"Eno-jd-UQc.text" = "¥8";
+
+/* Class = "UIButton"; normalTitle = "Kangzhuang"; ObjectID = "EqJ-N0-cEy"; */
+"EqJ-N0-cEy.normalTitle" = "康莊";
+
+/* Class = "UIButton"; normalTitle = "Yanqing"; ObjectID = "G2T-Gr-Rcz"; */
+"G2T-Gr-Rcz.normalTitle" = "延慶";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "Gz2-Yi-UkA"; */
+"Gz2-Yi-UkA.title" = "具體信息";
+
+/* Class = "UIButton"; normalTitle = "Show Schedule"; ObjectID = "Gz2-hU-vyM"; */
+"Gz2-hU-vyM.normalTitle" = "顯示時間表";
+
+/* Class = "UILabel"; text = "Huangtudian    22:55"; ObjectID = "HQC-xH-cYX"; */
+"HQC-xH-cYX.text" = "Huangtudian    22:55";
+
+/* Class = "UIButton"; normalTitle = "Shacheng"; ObjectID = "Ihs-HA-VN6"; */
+"Ihs-HA-VN6.normalTitle" = "沙城";
+
+/* Class = "UILabel"; text = "Line S2"; ObjectID = "Iup-TY-aMy"; */
+"Iup-TY-aMy.text" = "S2線";
+
+/* Class = "UIButton"; normalTitle = "Call Station"; ObjectID = "JpW-Vy-5r1"; */
+"JpW-Vy-5r1.normalTitle" = "致電車站";
+
+/* Class = "UIButton"; normalTitle = "Nankou"; ObjectID = "JrR-et-w0A"; */
+"JrR-et-w0A.normalTitle" = "南口";
+
+/* Class = "UIButton"; normalTitle = "Thu"; ObjectID = "KZa-F0-at4"; */
+"KZa-F0-at4.normalTitle" = "四";
+
+/* Class = "UILabel"; text = "Visit author's website"; ObjectID = "Khh-xP-aMY"; */
+"Khh-xP-aMY.text" = "訪問作者網站";
+
+/* Class = "UILabel"; text = "›"; ObjectID = "ShG-V0-TFx"; */
+"ShG-V0-TFx.text" = "›";
+
+/* Class = "UIButton"; normalTitle = "Badaling"; ObjectID = "TmT-op-oku"; */
+"TmT-op-oku.normalTitle" = "八達嶺";
+
+/* Class = "UIButton"; normalTitle = "Badaling"; ObjectID = "UI3-sc-eU1"; */
+"UI3-sc-eU1.normalTitle" = "八達嶺";
+
+/* Class = "UILabel"; text = "08:40"; ObjectID = "UTD-Vq-G1e"; */
+"UTD-Vq-G1e.text" = "08:40";
+
+/* Class = "UILabel"; text = "Please select your origin station and destination from here or on the map"; ObjectID = "W0P-cE-6NO"; */
+"W0P-cE-6NO.text" = "請在此或路網圖上選擇起點站和終點站";
+
+/* Class = "UIButton"; normalTitle = "Sun"; ObjectID = "Wji-Ya-Kgt"; */
+"Wji-Ya-Kgt.normalTitle" = "日";
+
+/* Class = "UILabel"; text = "Transportation Information"; ObjectID = "YWO-0V-gRr"; */
+"YWO-0V-gRr.text" = "公共交通信息";
+
+/* Class = "UIButton"; normalTitle = "Huangtudian"; ObjectID = "Ytp-kF-1ce"; */
+"Ytp-kF-1ce.normalTitle" = "黃土店";
+
+/* Class = "UILabel"; text = "To ride this train with a Beijing Municipal Transportation IC card, the card balance needs to be greater than ¥18"; ObjectID = "ZBt-aw-xsF"; */
+"ZBt-aw-xsF.text" = "若使用北京市政交通一卡通乘車，卡內金額至少為¥18。";
+
+/* Class = "UILabel"; text = "Station Information"; ObjectID = "abr-uW-f21"; */
+"abr-uW-f21.text" = "車站信息";
+
+/* Class = "UILabel"; text = "We couldn't find the matching train result. Please try a different weekday or reselect the origin and destination station."; ObjectID = "bdV-bV-4RK"; */
+"bdV-bV-4RK.text" = "根據您提供的信息，我們無法找到符合條件的車次。請重新選擇日期，或更改始發站和終點站。";
+
+/* Class = "UILabel"; text = "Huangtudian"; ObjectID = "bwJ-k2-kuw"; */
+"bwJ-k2-kuw.text" = "黃土店";
+
+/* Class = "UIButton"; normalTitle = "Sat"; ObjectID = "c87-oU-LHj"; */
+"c87-oU-LHj.normalTitle" = "六";
+
+/* Class = "UILabel"; text = "Important"; ObjectID = "cYt-cy-feA"; */
+"cYt-cy-feA.text" = "重要信息";
+
+/* Class = "UILabel"; text = "10:06"; ObjectID = "fwq-la-BPZ"; */
+"fwq-la-BPZ.text" = "10:06";
+
+/* Class = "UILabel"; text = "E-mail author"; ObjectID = "g1Z-yE-eMc"; */
+"g1Z-yE-eMc.text" = "電郵作者";
+
+/* Class = "UIButton"; normalTitle = "Directions"; ObjectID = "gL2-0P-p8m"; */
+"gL2-0P-p8m.normalTitle" = "導航";
+
+/* Class = "UIViewController"; title = "Huangtudian Station"; ObjectID = "hfQ-8G-wxw"; */
+"hfQ-8G-wxw.title" = "黃土店站";
+
+/* Class = "UINavigationItem"; title = "Transit"; ObjectID = "hw6-Az-zAx"; */
+"hw6-Az-zAx.title" = "Transit";
+
+/* Class = "UILabel"; text = "Lorem Ipsum Dolar Lorem Ipsum"; ObjectID = "hzM-w4-wT0"; */
+"hzM-w4-wT0.text" = "Lorem Ipsum Dolar Lorem Ipsum";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "i4s-AY-ET3"; */
+"i4s-AY-ET3.title" = "設定";
+
+/* Class = "UILabel"; text = "Rate the app"; ObjectID = "n6s-SN-IyJ"; */
+"n6s-SN-IyJ.text" = "評價應用程式";
+
+/* Class = "UILabel"; text = "Sorry!"; ObjectID = "ngk-z9-6zG"; */
+"ngk-z9-6zG.text" = "非常抱歉!";
+
+/* Class = "UIButton"; normalTitle = "Tue"; ObjectID = "q3D-ig-ZUJ"; */
+"q3D-ig-ZUJ.normalTitle" = "二";
+
+/* Class = "UIButton"; normalTitle = "Mon"; ObjectID = "rIe-oM-21N"; */
+"rIe-oM-21N.normalTitle" = "一";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "rtX-pq-OAS"; */
+"rtX-pq-OAS.title" = "設定";
+
+/* Class = "UIButton"; normalTitle = "Huangtudian"; ObjectID = "uUl-DS-2Gi"; */
+"uUl-DS-2Gi.normalTitle" = "黃土店";
+
+/* Class = "UITableViewSection"; headerTitle = "IC Card Information"; ObjectID = "uhR-PB-Zrd"; */
+"uhR-PB-Zrd.headerTitle" = "IC卡信息";
+
+/* Class = "UILabel"; text = "Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar "; ObjectID = "zKu-dG-HCo"; */
+"zKu-dG-HCo.text" = "Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar Lorem Ipsum Dolar ";
+
+/* Class = "UIButton"; normalTitle = "Fri"; ObjectID = "zlt-7G-FPj"; */
+"zlt-7G-FPj.normalTitle" = "五";

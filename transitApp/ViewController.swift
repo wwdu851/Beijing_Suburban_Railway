@@ -99,7 +99,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func refreshTrainData(day:Int){
-        displayTable = ScheduleInit.allTrainAfterTime(hour: 0, minute: 0, onLine: "S2", weekDay: weekDaySelectionCheckWeekday(weekday:day), atStation: startPlace, direction: trainDirection, headTo: destinationPlace)
+        displayTable = ScheduleInit.allTrainAfterTime(hour: 0, minute: 0, onLine: "S2", weekDay: day, atStation: startPlace, direction: trainDirection, headTo: destinationPlace)
         self.tableView.reloadData()
     }
     
@@ -111,17 +111,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
     }
     
-    func isWeekday() -> Bool{
+    func isWeekday() -> Int{
         let date = Date()
         let calendar = Calendar(identifier: .gregorian)
         let component = calendar.component(.weekday, from: date)
-        var returnValue = false
-        switch component {
-        case 3...5:
-            returnValue = true
-        default:
-            returnValue = false
-        }
+        let returnValue = component
         return returnValue
     }
     

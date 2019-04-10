@@ -106,6 +106,11 @@
 		3D4CECC420C9B6EA000A845F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D52CC9D1F2B234800591583 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		3D52CC9F1F2B910500591583 /* timeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeTable.swift; sourceTree = "<group>"; };
+		3D5901F722283D95002F1CF5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		3D5901F822283D95002F1CF5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		3D5901F922283D95002F1CF5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		3D5901FB22283D96002F1CF5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3D5901FC22283DE2002F1CF5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3D7020671F3475F6004B308D /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		3D72BD1D1F270CF800D7039D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3DA3093A205627550066C936 /* ScheduleInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInit.swift; sourceTree = "<group>"; };
@@ -367,6 +372,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
+				"zh-Hans",
 			);
 			mainGroup = 3D38F3751F26E44A00E05B75;
 			productRefGroup = 3D38F37F1F26E44A00E05B75 /* Products */;
@@ -495,6 +502,7 @@
 			children = (
 				3D38F3861F26E44A00E05B75 /* Base */,
 				3DC4EEEF216DC13300AEAC42 /* zh-Hans */,
+				3D5901F722283D95002F1CF5 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -504,6 +512,7 @@
 			children = (
 				3D38F38E1F26E44A00E05B75 /* Base */,
 				3DC4EEF0216DC13400AEAC42 /* zh-Hans */,
+				3D5901F822283D95002F1CF5 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -513,6 +522,7 @@
 			children = (
 				3D4CECC220C9B6EA000A845F /* Base */,
 				3DC4EEF1216DC13400AEAC42 /* zh-Hans */,
+				3D5901F922283D95002F1CF5 /* zh-Hant */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -522,6 +532,7 @@
 			children = (
 				3DB6170C2171B74400EB8937 /* zh-Hans */,
 				3DB6170E2171B78F00EB8937 /* en */,
+				3D5901FB22283D96002F1CF5 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -530,6 +541,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3DC4EEF5216DC18900AEAC42 /* zh-Hans */,
+				3D5901FC22283DE2002F1CF5 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

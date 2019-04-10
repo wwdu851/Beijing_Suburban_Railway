@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Stop" representedClassName="Stop" syncable="YES" codeGenerationType="class">
         <attribute name="hour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="minute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -27,7 +27,7 @@
     <elements>
         <element name="Stop" positionX="-9" positionY="119" width="128" height="90"/>
         <element name="Train_line" positionX="-9" positionY="9" width="128" height="90"/>
-        <element name="Train_run" positionX="297" positionY="20" width="128" height="105"/>
+        <element name="Train_run" positionX="297" positionY="20" width="128" height="103"/>
         <element name="Train_station" positionX="178" positionY="216" width="128" height="135"/>
     </elements>
 </model>
