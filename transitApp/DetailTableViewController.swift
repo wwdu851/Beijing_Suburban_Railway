@@ -22,7 +22,7 @@ class DetailTableViewController: UITableViewController {
         super.viewDidLoad()
 
 
-        self.title = String(trainNumber)
+        self.title = NSLocalizedString("Train Number: S", comment: "TRAIN NUMBER") + String(trainNumber) + NSLocalizedString(" ", comment: "CI")
         let tempStation = ScheduleInit.trainInfoWithNumber(trainNumber: trainNumber, from: start, to: destination)
         for eachStation in tempStation{
             if eachStation.stopsAt!.stationName == start{
