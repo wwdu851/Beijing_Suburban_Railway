@@ -61,26 +61,34 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             cell.priceLabel.text = ScheduleInit.calculatePrice(from: self.startPlace, to: self.destinationPlace)
             var timeStart = "00:00"
             var timeEnd = "00:00"
+            var startHr = 0
+            var startMin = 0
+            var endHr = 0
+            var endMin = 0
             let stopsForRow = displayTable[indexPath.row].hasStops?.allObjects as! [Stop]
             for eachStop in stopsForRow{
                 if eachStop.stopsAt!.stationName! == self.startPlace{
                     timeStart = "\(String(eachStop.hour)):\(timeLikeDigit(number: Int(eachStop.minute)))"
+                    startHr = Int(eachStop.hour)
+                    startMin = Int(eachStop.minute)
+                    
                 }else{
                     if eachStop.stopsAt!.stationName! == self.destinationPlace{
                         timeEnd = "\(String(eachStop.hour)):\(timeLikeDigit(number: Int(eachStop.minute)))"
+                        endHr = Int(eachStop.hour)
+                        endMin = Int(eachStop.minute)
                     }
                 }
             }
             cell.startTime.text = timeStart
             cell.endTime.text = timeEnd
+            cell.rideDuration.text = getDuration(startTimeHour: startHr, startTimeMinute: startMin, endTimeHour: endHr, endTimeMinute: endMin)
 
             return cell
         }else{
             let emptyCell = tableView.dequeueReusableCell(withIdentifier: "NoResultCell", for: indexPath)
              return emptyCell
         }
-    
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -109,6 +117,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }else{
             return String(number)
         }
+    }
+    
+    func getDuration(startTimeHour:Int,startTimeMinute:Int,endTimeHour:Int,endTimeMinute:Int) -> String{
+        let startTotal:Int = startTimeHour * 60 + startTimeMinute
+        let endTotal:Int = endTimeHour * 60 + endTimeMinute
+        let durationTotal:Int = endTotal - startTotal
+        let durationHour:Int = durationTotal / 60
+        let durationMinute:Int = durationTotal % 60
+        let hourText = NSLocalizedString("hr", comment: "hour")
+        let minuteText = NSLocalizedString("min", comment: "minute")
+        return String(durationHour) + " " + hourText + " " + String(durationMinute) + " " + minuteText
     }
     
     func isWeekday() -> Int{

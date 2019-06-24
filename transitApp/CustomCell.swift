@@ -21,6 +21,7 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var stackView: UIStackView!
     
     @IBOutlet weak var lineName: UILabel!
+    @IBOutlet weak var rideDuration: UILabel!
     
     override func awakeFromNib() {
         // stackView.layer.cornerRadius = 5
