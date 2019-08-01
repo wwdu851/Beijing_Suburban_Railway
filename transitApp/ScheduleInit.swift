@@ -21,7 +21,7 @@ struct ScheduleInit {
     
     static func trainInit () {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
+        
         let context = appDelegate.persistentContainer.viewContext
         
         deleteAllRecords()
@@ -46,7 +46,7 @@ struct ScheduleInit {
         let shacheng_station = Train_station(context: context)
         shacheng_station.stationName = "Shacheng"
         
-
+        
         huangtudian_station.nextStation = nankou_station
         nankou_station.prevStation = huangtudian_station
         nankou_station.nextStation = badaling_station
@@ -55,12 +55,12 @@ struct ScheduleInit {
         kangzhuang_station.nextStation = shacheng_station
         shacheng_station.prevStation = kangzhuang_station
         
-    
+        
         let line_s2 = Train_line(context: context)
         line_s2.lineName = "S2"
         line_s2.addToHasStations([huangtudian_station,nankou_station,badaling_station,yanqing_station,kangzhuang_station,shacheng_station])
         
-
+        
         // Train runs adding
         // Northbound Runs
         let train_201 = Train_run(context: context)
@@ -103,7 +103,7 @@ struct ScheduleInit {
         let train_236 = Train_run(context: context)
         let train_288 = Train_run(context: context)
         
-
+        
         // Northbound train Information Setting
         
         /* ---- Train 201 ---- */
@@ -112,20 +112,20 @@ struct ScheduleInit {
         let train_201_stop_3 = Stop(context: context)
         let train_201_stop_4 = Stop(context: context)
         
-        train_201_stop_1.hour = 7
-        train_201_stop_1.minute = 25
+        train_201_stop_1.hour = 6
+        train_201_stop_1.minute = 50
         train_201_stop_1.stopsAt = huangtudian_station
         
         train_201_stop_2.hour = 7
-        train_201_stop_2.minute = 58
+        train_201_stop_2.minute = 34
         train_201_stop_2.stopsAt = nankou_station
         
         train_201_stop_3.hour = 8
-        train_201_stop_3.minute = 41
+        train_201_stop_3.minute = 20
         train_201_stop_3.stopsAt = badaling_station
         
         train_201_stop_4.hour = 8
-        train_201_stop_4.minute = 56
+        train_201_stop_4.minute = 35
         train_201_stop_4.stopsAt = yanqing_station
         
         
@@ -142,11 +142,11 @@ struct ScheduleInit {
         let train_203_stop_2 = Stop(context: context)
         let train_203_stop_3 = Stop(context: context)
         let train_203_stop_4 = Stop(context: context)
-
+        
         train_203_stop_1.hour = 7
         train_203_stop_1.minute = 49
         train_203_stop_1.stopsAt = huangtudian_station
-    
+        
         train_203_stop_2.hour = 8
         train_203_stop_2.minute = 24
         train_203_stop_2.stopsAt = nankou_station
@@ -186,7 +186,7 @@ struct ScheduleInit {
         train_205_stop_3.stopsAt = yanqing_station
         
         
-    train_205.addToHasStops([train_205_stop_1,train_205_stop_2,train_205_stop_3])
+        train_205.addToHasStops([train_205_stop_1,train_205_stop_2,train_205_stop_3])
         train_205.inLine = line_s2
         train_205.trainNumber = 205
         train_205.weekdayService = true
@@ -254,7 +254,7 @@ struct ScheduleInit {
         train_211_stop_2.hour = 12
         train_211_stop_2.minute = 26
         train_211_stop_2.stopsAt = nankou_station
-    
+        
         train_211_stop_3.hour = 13
         train_211_stop_3.minute = 13
         train_211_stop_3.stopsAt = badaling_station
@@ -263,7 +263,7 @@ struct ScheduleInit {
         train_211_stop_4.minute = 28
         train_211_stop_4.stopsAt = yanqing_station
         
-    train_211.addToHasStops([train_211_stop_1,train_211_stop_2,train_211_stop_3, train_211_stop_4])
+        train_211.addToHasStops([train_211_stop_1,train_211_stop_2,train_211_stop_3, train_211_stop_4])
         train_211.inLine = line_s2
         train_211.trainNumber = 211
         train_211.weekdayService = true
@@ -271,16 +271,21 @@ struct ScheduleInit {
         /* ---- Train 213 ---- */
         let train_213_stop_1 = Stop(context: context)
         let train_213_stop_2 = Stop(context: context)
+        let train_213_stop_3 = Stop(context: context)
         
         train_213_stop_1.hour = 13
         train_213_stop_1.minute = 14
         train_213_stop_1.stopsAt = huangtudian_station
         
         train_213_stop_2.hour = 14
-        train_213_stop_2.minute = 36
-        train_213_stop_2.stopsAt = yanqing_station
+        train_213_stop_2.minute = 25
+        train_213_stop_2.stopsAt = badaling_station
         
-        train_213.addToHasStops([train_213_stop_1,train_213_stop_2])
+        train_213_stop_3.hour = 14
+        train_213_stop_3.minute = 40
+        train_213_stop_3.stopsAt = yanqing_station
+        
+        train_213.addToHasStops([train_213_stop_1,train_213_stop_2,train_213_stop_3])
         train_213.inLine = line_s2
         train_213.trainNumber = 213
         train_213.weekdayService = true
@@ -295,11 +300,11 @@ struct ScheduleInit {
         train_215_stop_1.stopsAt = huangtudian_station
         
         train_215_stop_2.hour = 14
-        train_215_stop_2.minute = 27
+        train_215_stop_2.minute = 33
         train_215_stop_2.stopsAt = nankou_station
         
         train_215_stop_3.hour = 15
-        train_215_stop_3.minute = 26
+        train_215_stop_3.minute = 30
         train_215_stop_3.stopsAt = yanqing_station
         
         train_215.addToHasStops([train_215_stop_1,train_215_stop_2,train_215_stop_3])
@@ -335,7 +340,7 @@ struct ScheduleInit {
         train_219_stop_2.hour = 17
         train_219_stop_2.minute = 25
         train_219_stop_2.stopsAt = yanqing_station
-    
+        
         train_219.addToHasStops([train_219_stop_1,train_219_stop_2])
         train_219.inLine = line_s2
         train_219.trainNumber = 219
@@ -400,7 +405,7 @@ struct ScheduleInit {
         train_225_stop_2.hour = 19
         train_225_stop_2.minute = 33
         train_225_stop_2.stopsAt = yanqing_station
-
+        
         
         train_225.addToHasStops([train_225_stop_1,train_225_stop_2])
         train_225.inLine = line_s2
@@ -517,20 +522,20 @@ struct ScheduleInit {
         let train_202_stop_1 = Stop(context: context)
         let train_202_stop_2 = Stop(context: context)
         let train_202_stop_3 = Stop(context: context)
-
+        
         train_202_stop_1.hour = 6
         train_202_stop_1.minute = 47
         train_202_stop_1.stopsAt = yanqing_station
-
+        
         train_202_stop_2.hour = 7
-        train_202_stop_2.minute = 57
+        train_202_stop_2.minute = 54
         train_202_stop_2.stopsAt = nankou_station
-
+        
         train_202_stop_3.hour = 8
         train_202_stop_3.minute = 36
         train_202_stop_3.stopsAt = huangtudian_station
-
-
+        
+        
         train_202.addToHasStops(train_202_stop_1)
         train_202.addToHasStops(train_202_stop_2)
         train_202.addToHasStops(train_202_stop_3)
@@ -736,11 +741,11 @@ struct ScheduleInit {
         let train_220_stop_3 = Stop(context: context)
         
         train_220_stop_1.hour = 14
-        train_220_stop_1.minute = 51
+        train_220_stop_1.minute = 55
         train_220_stop_1.stopsAt = yanqing_station
         
         train_220_stop_2.hour = 15
-        train_220_stop_2.minute = 12
+        train_220_stop_2.minute = 16
         train_220_stop_2.stopsAt = badaling_station
         
         train_220_stop_3.hour = 16
@@ -757,7 +762,7 @@ struct ScheduleInit {
         let train_222_stop_3 = Stop(context: context)
         
         train_222_stop_1.hour = 15
-        train_222_stop_1.minute = 44
+        train_222_stop_1.minute = 45
         train_222_stop_1.stopsAt = yanqing_station
         
         train_222_stop_2.hour = 16
@@ -911,7 +916,7 @@ struct ScheduleInit {
         train_234_stop_2.hour = 20
         train_234_stop_2.minute = 56
         train_234_stop_2.stopsAt = badaling_station
-    
+        
         train_234_stop_3.hour = 21
         train_234_stop_3.minute = 41
         train_234_stop_3.stopsAt = nankou_station
@@ -1036,7 +1041,7 @@ struct ScheduleInit {
                                 }else{
                                     filteredResult.append(eachTrain)
                                 }
-                                            
+                                
                             }
                         }
                     }
@@ -1123,7 +1128,7 @@ struct ScheduleInit {
                 }
             }
         }
-
+        
         return finalResult
     }
     
@@ -1199,7 +1204,7 @@ struct ScheduleInit {
         if to == "Shacheng" || from == "Shacheng"{
             price += 10
         }
-
+        
         returnString = "¥\(price)"
         
         return returnString

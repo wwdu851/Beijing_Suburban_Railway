@@ -127,7 +127,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let durationMinute:Int = durationTotal % 60
         let hourText = NSLocalizedString("hr", comment: "hour")
         let minuteText = NSLocalizedString("min", comment: "minute")
-        return String(durationHour) + " " + hourText + " " + String(durationMinute) + " " + minuteText
+        var returnString = ""
+        
+        if durationHour == 0{
+            returnString = String(durationMinute) + " " + minuteText
+        }else{
+            returnString = String(durationHour) + " " + hourText + " " + String(durationMinute) + " " + minuteText
+        }
+        
+        return returnString
     }
     
     func isWeekday() -> Int{
